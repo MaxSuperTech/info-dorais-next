@@ -3,6 +3,7 @@ import ContactForm from "@/components/ContactForm.astro";
 import FAQBlock from "@/components/FAQBlock.astro";
 import Hero from "@/components/Hero.astro";
 import Icon from "@/components/Icon.astro";
+import RemoteSupportProcedure from "@/components/RemoteSupportProcedure.astro";
 import SectionIntro from "@/components/SectionIntro.astro";
 import ServiceCard from "@/components/ServiceCard.astro";
 import {
@@ -112,6 +113,7 @@ const detailCards =
 ---
 
 <Hero locale={locale} page={page} pageKey={pageKey} />
+{!isPrivacy && pageKey === "remote" && <RemoteSupportProcedure locale={locale} />}
 
 {isPrivacy ? (
   <section class="section">

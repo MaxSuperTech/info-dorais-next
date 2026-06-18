@@ -21,6 +21,7 @@ export type IconName =
   | "check"
   | "clock"
   | "database"
+  | "download"
   | "globe"
   | "hard-drive"
   | "laptop"

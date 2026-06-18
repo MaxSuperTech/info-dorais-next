@@ -1,0 +1,150 @@
+---
+import Icon from "@/components/Icon.astro";
+import { brand, type Locale } from "@/data/site";
+
+const { locale } = Astro.props as { locale: Locale };
+
+const remoteSupport = {
+  fr: {
+    label: "Procédure de support",
+    title: "Deux façons simples de démarrer une session à distance.",
+    text: "On privilégie Assistance rapide sous Windows. Si l’application n’est pas disponible ou si la situation le demande, AnyDesk reste une option simple.",
+    quick: {
+      title: "Option 1 — Assistance rapide Windows",
+      intro: "Ouvrez l’application, entrez le code fourni, puis autorisez le partage d’écran. Vous gardez le contrôle de la session.",
+      source: "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+      sourceLabel: "Guide Microsoft",
+      store: "https://apps.microsoft.com/detail/9p7bp5vnwkx5?hl=fr-CA&gl=CA",
+      storeLabel: "Microsoft Store",
+      steps: [
+        ["Ouvrir", "Appuyez sur Ctrl + Windows + Q ou cherchez “Assistance rapide” dans Windows."],
+        ["Obtenir de l’aide", "Cliquez sur Obtenir de l’aide, puis entrez le code temporaire fourni par Info Dorais."],
+        ["Autoriser", "Acceptez le partage d’écran. Si un contrôle est demandé, vous devez l’approuver."],
+      ],
+    },
+    anydesk: {
+      title: "Option 2 — AnyDesk",
+      intro: "Téléchargez AnyDesk depuis le site officiel, ouvrez l’application, puis transmettez votre identifiant AnyDesk.",
+      download: "https://anydesk.com/fr/downloads/windows",
+      downloadLabel: "Télécharger AnyDesk",
+      steps: [
+        ["Télécharger", "Utilisez le lien officiel AnyDesk pour Windows."],
+        ["Ouvrir", "L’application peut généralement être ouverte rapidement après le téléchargement."],
+        ["Partager l’ID", "Envoyez l’identifiant AnyDesk seulement après avoir communiqué avec Info Dorais."],
+      ],
+    },
+    safety: "N’acceptez jamais une session à distance que vous n’avez pas demandée. Info Dorais ne vous demandera jamais votre mot de passe pendant une session.",
+  },
+  en: {
+    label: "Support procedure",
+    title: "Two simple ways to start a remote support session.",
+    text: "Quick Assist on Windows is preferred first. If it is unavailable or the situation requires it, AnyDesk remains a simple option.",
+    quick: {
+      title: "Option 1 — Windows Quick Assist",
+      intro: "Open the app, enter the provided code, then allow screen sharing. You stay in control of the session.",
+      source: "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+      sourceLabel: "Microsoft guide",
+      store: "https://apps.microsoft.com/detail/9p7bp5vnwkx5?hl=en-CA&gl=CA",
+      storeLabel: "Microsoft Store",
+      steps: [
+        ["Open", "Press Ctrl + Windows + Q or search for “Quick Assist” in Windows."],
+        ["Get help", "Select Get help, then enter the temporary code provided by Info Dorais."],
+        ["Allow", "Approve screen sharing. If control is requested, you must approve it."],
+      ],
+    },
+    anydesk: {
+      title: "Option 2 — AnyDesk",
+      intro: "Download AnyDesk from the official website, open the app, then share your AnyDesk ID.",
+      download: "https://anydesk.com/en/downloads/windows",
+      downloadLabel: "Download AnyDesk",
+      steps: [
+        ["Download", "Use the official AnyDesk link for Windows."],
+        ["Open", "The app can usually be opened quickly after downloading."],
+        ["Share the ID", "Send the AnyDesk ID only after you have contacted Info Dorais."],
+      ],
+    },
+    safety: "Never accept a remote session you did not request. Info Dorais will never ask for your password during a session.",
+  },
+} as const;
+
+const copy = remoteSupport[locale];
+---
+
+<section class="section bg-card" id="procedure-support">
+  <div class="container">
+    <div class="mb-10 max-w-3xl">
+      <span class="badge">{copy.label}</span>
+      <h2 class="mt-4 font-heading text-3xl font-black leading-tight sm:text-5xl">{copy.title}</h2>
+      <p class="mt-4 text-lg leading-8 text-muted-foreground">{copy.text}</p>
+    </div>
+    <div class="grid gap-4 lg:grid-cols-2">
+      <article class="card card-hover p-6 sm:p-8">
+        <div class="flex items-start gap-4">
+          <div class="flex size-12 shrink-0 items-center justify-center bg-primary text-primary-foreground">
+            <Icon name="monitor" class="size-6" />
+          </div>
+          <div>
+            <h3 class="font-heading text-2xl font-black">{copy.quick.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-muted-foreground">{copy.quick.intro}</p>
+          </div>
+        </div>
+        <div class="mt-6 grid gap-3">
+          {copy.quick.steps.map(([title, text], index) => (
+            <div class="grid grid-cols-[auto_1fr] gap-4 border border-border bg-background/70 p-4">
+              <div class="flex size-9 items-center justify-center bg-primary text-sm font-black text-primary-foreground">{index + 1}</div>
+              <div>
+                <strong class="block text-sm font-black">{title}</strong>
+                <span class="mt-1 block text-sm leading-6 text-muted-foreground">{text}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a class="btn btn-primary" href={copy.quick.source} target="_blank" rel="noopener">
+            {copy.quick.sourceLabel}
+            <Icon name="arrow" class="size-4" />
+          </a>
+          <a class="btn btn-secondary" href={copy.quick.store} target="_blank" rel="noopener">
+            {copy.quick.storeLabel}
+          </a>
+        </div>
+      </article>
+
+      <article class="card card-hover p-6 sm:p-8">
+        <div class="flex items-start gap-4">
+          <div class="flex size-12 shrink-0 items-center justify-center bg-foreground text-background">
+            <Icon name="download" class="size-6" />
+          </div>
+          <div>
+            <h3 class="font-heading text-2xl font-black">{copy.anydesk.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-muted-foreground">{copy.anydesk.intro}</p>
+          </div>
+        </div>
+        <div class="mt-6 grid gap-3">
+          {copy.anydesk.steps.map(([title, text], index) => (
+            <div class="grid grid-cols-[auto_1fr] gap-4 border border-border bg-background/70 p-4">
+              <div class="flex size-9 items-center justify-center bg-foreground text-sm font-black text-background">{index + 1}</div>
+              <div>
+                <strong class="block text-sm font-black">{title}</strong>
+                <span class="mt-1 block text-sm leading-6 text-muted-foreground">{text}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a class="btn btn-primary" href={copy.anydesk.download} target="_blank" rel="noopener">
+            <Icon name="download" class="size-4" />
+            {copy.anydesk.downloadLabel}
+          </a>
+          <a class="btn btn-secondary" href={brand.emailHref}>
+            <Icon name="mail" class="size-4" />
+            {brand.email}
+          </a>
+        </div>
+      </article>
+    </div>
+    <div class="mt-4 border-l-2 border-primary bg-primary/10 p-4 text-sm font-bold leading-6 text-primary">
+      {copy.safety}
+    </div>
+  </div>
+</section>

@@ -66,6 +66,38 @@ img {
   height: auto;
 }
 
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% center;
+  opacity: .46;
+  filter: saturate(.92) contrast(1.08);
+  transform: scale(1.01);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, hsl(var(--background)) 0%, hsl(var(--background) / .96) 38%, hsl(var(--background) / .68) 70%, hsl(var(--background) / .34) 100%),
+    linear-gradient(0deg, hsl(var(--background) / .82) 0%, transparent 34%);
+}
+
+.dark .hero-photo {
+  opacity: .38;
+}
+
+.dark .hero-overlay {
+  background:
+    linear-gradient(90deg, hsl(var(--background)) 0%, hsl(var(--background) / .92) 42%, hsl(var(--background) / .64) 74%, hsl(var(--background) / .30) 100%),
+    linear-gradient(0deg, hsl(var(--background) / .86) 0%, transparent 36%);
+}
+
 ::selection {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
