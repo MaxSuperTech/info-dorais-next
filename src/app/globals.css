@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 215 58% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 58% 8%;
+    --primary: 211 78% 34%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 211 36% 93%;
+    --secondary-foreground: 215 58% 8%;
+    --muted: 212 28% 92%;
+    --muted-foreground: 215 17% 39%;
+    --accent: 210 52% 94%;
+    --accent-foreground: 211 78% 26%;
+    --border: 214 27% 87%;
+    --input: 214 27% 87%;
+    --ring: 211 78% 34%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 215 58% 8%;
+    --foreground: 210 40% 96%;
+    --card: 215 45% 12%;
+    --card-foreground: 210 40% 96%;
+    --primary: 211 78% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 35% 17%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 215 35% 17%;
+    --muted-foreground: 214 20% 72%;
+    --accent: 215 35% 18%;
+    --accent-foreground: 210 40% 96%;
+    --border: 215 28% 22%;
+    --input: 215 28% 22%;
+    --ring: 211 78% 58%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+@layer components {
+  .section {
+    @apply py-16 sm:py-20;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-primary;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply size-2 rounded-full bg-primary;
+  }
+
+  .focus-card {
+    @apply rounded-lg border border-border bg-card shadow-sm transition-colors duration-200 hover:border-primary/35;
+  }
+}
