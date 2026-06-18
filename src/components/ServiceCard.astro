@@ -6,27 +6,35 @@ const { service, locale } = Astro.props as { service: ServiceCard; locale: Local
 ---
 
 <article class="card card-hover group overflow-hidden">
-  <div class="relative h-44 overflow-hidden border-b border-border bg-foreground">
-    <img src={service.image} alt={service.title} loading="lazy" width="800" height="600" class="h-full w-full object-cover opacity-85 saturate-[.92] transition duration-300 group-hover:scale-[1.035] group-hover:opacity-100" />
-    <div class="absolute inset-0 bg-gradient-to-tr from-foreground/88 via-foreground/30 to-primary/10"></div>
-    <div class="visual-grid visual-scan absolute inset-0 opacity-55"></div>
-    <div class="absolute left-4 top-4 flex size-12 items-center justify-center border border-background/20 bg-background text-primary shadow-line">
-      <Icon name={service.icon} class="size-6" />
+  <a class="block focus:outline-none focus:ring-2 focus:ring-primary/40" href={service.href} aria-label={service.title}>
+    <div class="relative min-h-72 overflow-hidden bg-foreground">
+      <img src={service.image} alt="" aria-hidden="true" loading="lazy" width="900" height="700" class="absolute inset-0 h-full w-full object-cover opacity-78 saturate-[.9] transition duration-300 group-hover:scale-[1.04] group-hover:opacity-95" />
+      <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,31,.18),rgba(7,17,31,.88))]"></div>
+      <div class="visual-grid visual-scan absolute inset-0 opacity-45"></div>
+      <div class="relative flex min-h-72 flex-col justify-between p-5 text-background">
+        <div class="flex items-center justify-between gap-3">
+          <span class="border border-background/20 bg-background px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-primary">
+            {service.tags[0]}
+          </span>
+          <span class="flex size-12 items-center justify-center border border-background/20 bg-foreground/80 backdrop-blur">
+            <Icon name={service.icon} class="size-6" />
+          </span>
+        </div>
+        <div>
+          <h3 class="font-heading text-3xl font-black leading-none sm:text-4xl">{service.title}</h3>
+          <div class="mt-5 inline-flex items-center gap-2 border border-background/25 bg-background/10 px-3 py-2 text-sm font-black backdrop-blur">
+            {locale === "en" ? "Learn more" : "En savoir plus"}
+            <Icon name="arrow" class="size-4 transition group-hover:translate-x-1" />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="absolute bottom-4 left-4 right-4 border border-background/15 bg-foreground/85 px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-background backdrop-blur">
-      {service.tags[0]}
-    </div>
-  </div>
+  </a>
   <div class="p-6">
-    <Icon name={service.icon} class="mb-4 size-7 text-primary" />
-    <h3 class="font-heading text-xl font-black">{service.title}</h3>
-    <p class="mt-3 text-sm leading-6 text-muted-foreground">{service.text}</p>
+    <p class="text-sm leading-6 text-muted-foreground">{service.text}</p>
     <div class="mt-5 flex flex-wrap gap-2 border-t border-border pt-4">
-      {service.tags.map((tag) => <span class="bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">{tag}</span>)}
+      {service.tags.slice(1).map((tag) => <span class="bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">{tag}</span>)}
+      {service.tags.length === 1 && <span class="bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">{service.tags[0]}</span>}
     </div>
-    <a class="btn btn-secondary mt-5 w-full" href={service.href}>
-      <span>{locale === "en" ? "Learn more" : "En savoir plus"}</span>
-      <Icon name="arrow" class="size-4" />
-    </a>
   </div>
 </article>
