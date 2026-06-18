@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, type CSSProperties } from "react";
 import {
   ArrowRight,
   Building2,
@@ -278,8 +278,9 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
             {services[locale].map((service, index) => (
               <Card
                 key={service.title}
-                className="motion-card motion-fade-up group overflow-hidden shadow-none"
-                style={{ animationDelay: `${index * 70}ms` }}
+                className="motion-card group overflow-hidden shadow-none"
+                data-animate="lift"
+                style={{ "--motion-delay": `${index * 80}ms` } as CSSProperties}
               >
                 <ContextServiceImage
                   image={service.image}
@@ -336,8 +337,13 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
             </div>
           </div>
           <div className="grid border border-background/15 sm:grid-cols-2">
-            {serviceDetails[locale].map(([title, text, Icon]) => (
-              <div key={title} className="border-b border-background/15 p-5 sm:border-r even:sm:border-r-0">
+            {serviceDetails[locale].map(([title, text, Icon], index) => (
+              <div
+                key={title}
+                className="border-b border-background/15 p-5 sm:border-r even:sm:border-r-0"
+                data-animate="fade-up"
+                style={{ "--motion-delay": `${index * 55}ms` } as CSSProperties}
+              >
                 <Icon className="size-6 text-background" aria-hidden="true" />
                 <h3 className="mt-4 font-heading font-black text-background">{title}</h3>
                 <p className="mt-2 text-sm leading-6 text-background/70">{text}</p>
@@ -361,7 +367,12 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
           />
           <div className="grid border border-border bg-card md:grid-cols-3">
             {processSteps[locale].map(([title, text], index) => (
-              <div key={title} className="border-b border-border p-6 md:border-b-0 md:border-r last:md:border-r-0">
+              <div
+                key={title}
+                className="border-b border-border p-6 md:border-b-0 md:border-r last:md:border-r-0"
+                data-animate="fade-up"
+                style={{ "--motion-delay": `${index * 90}ms` } as CSSProperties}
+              >
                 <div className="flex size-10 items-center justify-center bg-primary font-heading text-sm font-black text-primary-foreground">{index + 1}</div>
                 <h3 className="mt-5 font-heading text-xl font-black">{title}</h3>
                 <p className="mt-3 text-sm leading-6 text-muted-foreground">{text}</p>
@@ -373,7 +384,7 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
 
       <section className="section bg-card">
         <div className="container grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
-          <div className="motion-fade-up">
+          <div data-animate="fade-up">
             <Badge>{locale === "fr" ? "À Laval" : "Laval area"}</Badge>
             <h2 className="mt-4 font-heading text-3xl font-black leading-tight sm:text-5xl">
               {locale === "fr" ? "Trouvez vite le bon technicien informatique à Laval." : "Find the right IT technician in Laval quickly."}
@@ -397,7 +408,7 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
 
       <section className="section pt-0">
         <div className="container">
-          <div className="border border-primary/30 bg-primary/10 p-6 shadow-line sm:p-10">
+          <div className="border border-primary/30 bg-primary/10 p-6 shadow-line sm:p-10" data-animate="zoom">
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
                 <h2 className="font-heading text-3xl font-black leading-tight sm:text-5xl">
@@ -427,7 +438,7 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
 
 function FaqSection({ locale, faqs }: { locale: Locale; faqs: [string, string][] }) {
   return (
-    <div className="motion-fade-up motion-delay-2 border border-border bg-background shadow-line">
+    <div className="border border-border bg-background shadow-line" data-animate="fade-left">
       <div className="border-b border-border p-5 sm:p-6">
         <span className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
           {locale === "fr" ? "Questions courantes" : "Common questions"}
@@ -458,7 +469,7 @@ function ContactSection({ locale }: { locale: Locale }) {
   return (
     <section className="section" id="diagnostic">
       <div className="container grid gap-8 lg:grid-cols-[1.05fr_.95fr]">
-        <Card className="shadow-premium">
+        <Card className="shadow-premium" data-animate="zoom">
           <CardContent className="p-6 sm:p-8">
             <div className="flex items-center gap-3">
               <FileText className="size-7 text-primary" />
@@ -527,7 +538,7 @@ function ContactSection({ locale }: { locale: Locale }) {
           </CardContent>
         </Card>
 
-        <div>
+        <div data-animate="fade-left">
           <SectionIntro
             label="Info Dorais"
             title={locale === "fr" ? "Appel, courriel ou diagnostic." : "Call, email or diagnostic."}
@@ -538,9 +549,13 @@ function ContactSection({ locale }: { locale: Locale }) {
             }
           />
           <div className="grid gap-3">
-            {contactItems.map((item) => {
+            {contactItems.map((item, index) => {
               const content = (
-                <div className="focus-card flex gap-4 p-4">
+                <div
+                  className="focus-card flex gap-4 p-4"
+                  data-animate="fade-up"
+                  style={{ "--motion-delay": `${index * 60}ms` } as CSSProperties}
+                >
                   <item.icon className="mt-1 size-5 shrink-0 text-primary" />
                   <span>
                     <strong className="block text-sm">{item.label}</strong>
@@ -731,7 +746,7 @@ function SectionIntro({
   centered?: boolean;
 }) {
   return (
-    <div className={centered ? "mx-auto mb-10 max-w-2xl text-center" : "mb-10 max-w-3xl"}>
+    <div className={centered ? "mx-auto mb-10 max-w-2xl text-center" : "mb-10 max-w-3xl"} data-animate="fade-up">
       <Badge>{label}</Badge>
       <h2 className="mt-4 font-heading text-3xl font-black leading-tight sm:text-5xl">{title}</h2>
       {text ? <p className="mt-4 text-lg leading-8 text-muted-foreground">{text}</p> : null}

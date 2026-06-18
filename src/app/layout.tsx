@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { HtmlLangSync } from "@/components/html-lang-sync";
+import { MotionEffects } from "@/components/motion-effects";
 import { ThemeProvider } from "@/components/theme-provider";
 import { brand } from "@/lib/site";
 
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={`${inter.variable} ${jakarta.variable}`}>
         <ThemeProvider>
           <HtmlLangSync />
+          <MotionEffects />
           {children}
         </ThemeProvider>
         <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" async defer />
