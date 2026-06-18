@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import {
   ArrowRight,
   Building2,
+  ChevronDown,
   CheckCircle2,
   Cpu,
   Database,
@@ -29,10 +30,13 @@ import { FormStatus } from "@/components/form-status";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { FaqJsonLd, ServiceJsonLd } from "@/components/structured-data";
 import {
   brand,
   common,
   contactItems,
+  faqByPage,
+  localSeoTerms,
   pages,
   paths,
   processSteps,
@@ -53,17 +57,19 @@ export function SitePage({ locale, pageKey }: { locale: Locale; pageKey: PageKey
 
   return (
     <main>
+      <FaqJsonLd locale={locale} pageKey={pageKey} />
+      <ServiceJsonLd locale={locale} pageKey={pageKey} />
       <section className="relative overflow-hidden border-b border-border bg-background">
         <div className="absolute inset-x-0 top-0 h-1.5 bg-primary" />
         <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(20,85,155,.12),transparent_34%),radial-gradient(circle_at_86%_16%,rgba(20,85,155,.16),transparent_28%)]" />
         <div className="container relative grid min-h-[calc(100dvh-76px)] items-center gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_430px] lg:py-16 xl:grid-cols-[minmax(0,1fr)_470px]">
           <div className="max-w-4xl">
-            <Badge>{page.eyebrow}</Badge>
-            <h1 className="mt-5 text-4xl font-black leading-[1.02] tracking-normal text-foreground sm:text-6xl lg:text-7xl">
+            <Badge className="motion-fade-up">{page.eyebrow}</Badge>
+            <h1 className="motion-fade-up motion-delay-1 mt-5 text-4xl font-black leading-[1.02] tracking-normal text-foreground sm:text-6xl lg:text-7xl">
               {page.h1}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">{page.lead}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <p className="motion-fade-up motion-delay-2 mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">{page.lead}</p>
+            <div className="motion-fade-up motion-delay-3 mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <a href={brand.phoneHref}>
                   <Phone className="size-5" />
@@ -77,7 +83,7 @@ export function SitePage({ locale, pageKey }: { locale: Locale; pageKey: PageKey
                 </Link>
               </Button>
             </div>
-            <div className="mt-9 grid border-y border-border sm:grid-cols-3">
+            <div className="motion-fade-up motion-delay-4 mt-9 grid border-y border-border sm:grid-cols-3">
               {proof[locale].map(([title, text]) => (
                 <div key={title} className="border-b border-border py-4 sm:border-b-0 sm:border-r sm:px-4 first:sm:pl-0 last:sm:border-r-0">
                   <strong className="font-heading text-sm font-black text-foreground">{title}</strong>
@@ -87,15 +93,15 @@ export function SitePage({ locale, pageKey }: { locale: Locale; pageKey: PageKey
             </div>
           </div>
 
-          <aside className="border border-border bg-card shadow-premium" aria-label={locale === "fr" ? "Résumé du diagnostic" : "Diagnostic summary"}>
+          <aside className="motion-fade-left motion-delay-2 border border-border bg-card shadow-premium" aria-label={locale === "fr" ? "Résumé du diagnostic" : "Diagnostic summary"}>
             <div className="relative aspect-[4/3] overflow-hidden border-b border-border bg-foreground">
               <Image
                 src={page.image}
-                alt=""
+                alt={page.title}
                 fill
                 priority={isHome}
                 sizes="(min-width: 1024px) 430px, 100vw"
-                className="object-cover opacity-80"
+                className="image-drift object-cover opacity-80"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 z-30 border-t border-background/10 bg-foreground/95 p-5 text-background">
@@ -141,6 +147,8 @@ export function SitePage({ locale, pageKey }: { locale: Locale; pageKey: PageKey
 
 function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
   const t = common[locale];
+  const faqs = faqByPage[locale][pageKey];
+  const terms = localSeoTerms[locale];
 
   return (
     <>
@@ -172,15 +180,19 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
             }
           />
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {services[locale].map((service) => (
-              <Card key={service.title} className="group overflow-hidden shadow-none transition duration-200 hover:-translate-y-1 hover:border-primary/45 hover:shadow-premium">
+            {services[locale].map((service, index) => (
+              <Card
+                key={service.title}
+                className="motion-card motion-fade-up group overflow-hidden shadow-none"
+                style={{ animationDelay: `${index * 70}ms` }}
+              >
                 <div className="relative h-44 border-b border-border bg-foreground">
                   <Image
                     src={service.image}
                     alt={service.title}
                     fill
                     sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover opacity-90 transition-opacity group-hover:opacity-100"
+                    className="object-cover opacity-90 transition duration-500 group-hover:scale-[1.035] group-hover:opacity-100"
                   />
                 </div>
                 <CardContent>
@@ -266,6 +278,30 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
         </div>
       </section>
 
+      <section className="section bg-card">
+        <div className="container grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
+          <div className="motion-fade-up">
+            <Badge>{locale === "fr" ? "À Laval" : "Laval area"}</Badge>
+            <h2 className="mt-4 font-heading text-3xl font-black leading-tight sm:text-5xl">
+              {locale === "fr" ? "Trouvez vite le bon technicien informatique à Laval." : "Find the right IT technician in Laval quickly."}
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-muted-foreground">
+              {locale === "fr"
+                ? "Que vous cherchiez une réparation ordinateur Laval, un support informatique Laval ou une réparation PC Laval, l’objectif reste le même: comprendre vite le problème et choisir la bonne intervention."
+                : "Whether you need computer repair Laval, IT support Laval or PC repair Laval, the goal stays the same: understand the issue quickly and choose the right intervention."}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {terms.map((term) => (
+                <span key={term} className="border border-primary/25 bg-primary/10 px-3 py-2 text-sm font-bold text-primary">
+                  {term}
+                </span>
+              ))}
+            </div>
+          </div>
+          <FaqSection locale={locale} faqs={faqs} />
+        </div>
+      </section>
+
       <section className="section pt-0">
         <div className="container">
           <div className="border border-primary/30 bg-primary/10 p-6 shadow-line sm:p-10">
@@ -296,8 +332,35 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
   );
 }
 
+function FaqSection({ locale, faqs }: { locale: Locale; faqs: [string, string][] }) {
+  return (
+    <div className="motion-fade-up motion-delay-2 border border-border bg-background shadow-line">
+      <div className="border-b border-border p-5 sm:p-6">
+        <span className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
+          {locale === "fr" ? "Questions courantes" : "Common questions"}
+        </span>
+        <h3 className="mt-2 font-heading text-2xl font-black">
+          {locale === "fr" ? "Réponses rapides avant d’appeler." : "Quick answers before calling."}
+        </h3>
+      </div>
+      <div className="divide-y divide-border">
+        {faqs.map(([question, answer], index) => (
+          <details key={question} className="group p-5 open:bg-primary/5 sm:p-6" open={index === 0}>
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-heading text-base font-black">
+              <span>{question}</span>
+              <ChevronDown className="size-5 shrink-0 text-primary transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
+            </summary>
+            <p className="mt-4 text-sm leading-7 text-muted-foreground">{answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ContactSection({ locale }: { locale: Locale }) {
   const t = common[locale];
+  const faqs = faqByPage[locale].contact;
 
   return (
     <section className="section" id="diagnostic">
@@ -406,6 +469,9 @@ function ContactSection({ locale }: { locale: Locale }) {
             </a>
           </Button>
         </div>
+      </div>
+      <div className="container mt-10">
+        <FaqSection locale={locale} faqs={faqs} />
       </div>
     </section>
   );

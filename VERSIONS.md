@@ -7,6 +7,7 @@ Ce repo garde les versions principales dans des branches faciles a comparer.
 - `main` : derniere version stable, design premium vectoriel.
 - `version/original-next` : premiere version Next.js complete avec visuels photo.
 - `version/photo-premium` : design premium carre avec visuels photo.
+- `version/photo-refresh-seo-motion` : version photo rafraichie avec animations douces, FAQ SEO locale et donnees structurees.
 - `version/vector-premium` : snapshot de la version premium vectorielle.
 - `version/final-client` : branche de livraison rapide, actuellement identique a `main`.
 

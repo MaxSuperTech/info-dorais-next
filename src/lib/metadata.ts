@@ -24,14 +24,14 @@ export function pageMetadata(locale: Locale, pageKey: PageKey): Metadata {
       siteName: brand.name,
       locale: locale === "fr" ? "fr_CA" : "en_CA",
       alternateLocale: otherLocale === "fr" ? "fr_CA" : "en_CA",
-      images: [{ url: "/images/logo.png", width: 1080, height: 1080, alt: "Info Dorais" }],
+      images: [{ url: page.image, alt: page.title }],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: page.title,
       description: page.description,
-      images: ["/images/logo.png"],
+      images: [page.image],
     },
   };
 }

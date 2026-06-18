@@ -67,7 +67,7 @@ export const services = {
       title: "Réparation d’ordinateurs",
       text: "Diagnostic PC, lenteur, erreurs Windows, démarrage difficile, matériel et optimisation.",
       icon: Laptop,
-      image: "/images/computer-repair.webp",
+      image: "/images/repair-refresh.webp",
       href: paths.repair.fr,
       items: ["Réparation PC Laval", "Installation Windows", "Transfert de données"],
     },
@@ -75,7 +75,7 @@ export const services = {
       title: "Suppression de virus",
       text: "Nettoyage des logiciels indésirables, vérification du navigateur et conseils de prévention.",
       icon: ShieldCheck,
-      image: "/images/security.webp",
+      image: "/images/security-refresh.webp",
       href: paths.services.fr,
       items: ["Analyse sécurité", "Nettoyage navigateur", "Protection de base"],
     },
@@ -83,7 +83,7 @@ export const services = {
       title: "Support à distance",
       text: "Assistance rapide pour courriel, Windows, logiciels, imprimante et petits blocages.",
       icon: MonitorCog,
-      image: "/images/remote-support.webp",
+      image: "/images/remote-refresh.webp",
       href: paths.remote.fr,
       items: ["Assistance rapide", "AnyDesk au besoin", "Explications claires"],
     },
@@ -91,7 +91,7 @@ export const services = {
       title: "Services PME",
       text: "Postes, courriels professionnels, réseau, sauvegardes, entretien et accompagnement.",
       icon: Building2,
-      image: "/images/network.webp",
+      image: "/images/pme-refresh.webp",
       href: paths.pme.fr,
       items: ["Support récurrent", "Prévention", "Documentation simple"],
     },
@@ -101,7 +101,7 @@ export const services = {
       title: "Computer repair",
       text: "PC diagnostics, slowdowns, Windows errors, startup issues, hardware and optimization.",
       icon: Laptop,
-      image: "/images/computer-repair.webp",
+      image: "/images/repair-refresh.webp",
       href: paths.repair.en,
       items: ["PC repair Laval", "Windows installation", "Data transfer"],
     },
@@ -109,7 +109,7 @@ export const services = {
       title: "Virus removal",
       text: "Unwanted software cleanup, browser checks and prevention advice.",
       icon: ShieldCheck,
-      image: "/images/security.webp",
+      image: "/images/security-refresh.webp",
       href: paths.services.en,
       items: ["Security check", "Browser cleanup", "Basic protection"],
     },
@@ -117,7 +117,7 @@ export const services = {
       title: "Remote support",
       text: "Fast help for email, Windows, software, printers and everyday issues.",
       icon: MonitorCog,
-      image: "/images/remote-support.webp",
+      image: "/images/remote-refresh.webp",
       href: paths.remote.en,
       items: ["Quick Assist", "AnyDesk when needed", "Clear explanations"],
     },
@@ -125,7 +125,7 @@ export const services = {
       title: "Small business services",
       text: "Workstations, professional email, network, backups, maintenance and guidance.",
       icon: Building2,
-      image: "/images/network.webp",
+      image: "/images/pme-refresh.webp",
       href: paths.pme.en,
       items: ["Recurring support", "Prevention", "Simple documentation"],
     },
@@ -142,7 +142,7 @@ export const pages = {
       h1: "Réparation d’ordinateur et support informatique sans détour.",
       lead:
         "PC lent, virus, problème Windows, Wi-Fi instable ou besoin d’un technicien fiable pour votre PME? Info Dorais diagnostique, répare et explique clairement la suite.",
-      image: "/images/hero.webp",
+      image: "/images/hero-refresh.webp",
     },
     services: {
       title: "Services informatiques Laval | Info Dorais",
@@ -152,7 +152,7 @@ export const pages = {
       h1: "Services informatiques pour régler, stabiliser et prévenir.",
       lead:
         "Une offre claire pour les besoins courants : dépannage, entretien, sécurité, Windows, courriels, réseau et assistance à distance.",
-      image: "/images/computer-repair.webp",
+      image: "/images/repair-refresh.webp",
     },
     repair: {
       title: "Réparation ordinateur Laval | Réparation PC Laval | Info Dorais",
@@ -162,7 +162,7 @@ export const pages = {
       h1: "Votre ordinateur ralentit, bloque ou ne démarre plus?",
       lead:
         "On identifie la cause, on protège vos données quand c’est possible, puis on applique une solution réaliste : réparation, optimisation, nettoyage ou installation Windows.",
-      image: "/images/computer-repair.webp",
+      image: "/images/repair-refresh.webp",
     },
     remote: {
       title: "Support à distance Laval | Info Dorais",
@@ -172,7 +172,7 @@ export const pages = {
       h1: "Support informatique à distance quand le problème peut se régler sans déplacement.",
       lead:
         "Idéal pour courriel, Windows, logiciels, imprimantes, configuration et accompagnement pas à pas.",
-      image: "/images/remote-support.webp",
+      image: "/images/remote-refresh.webp",
     },
     pme: {
       title: "Support informatique PME Laval | Info Dorais",
@@ -182,7 +182,7 @@ export const pages = {
       h1: "Un technicien informatique pour garder votre petite entreprise fonctionnelle.",
       lead:
         "Info Dorais aide les PME avec les postes, courriels, réseau, sauvegardes, sécurité de base et support récurrent.",
-      image: "/images/network.webp",
+      image: "/images/pme-refresh.webp",
     },
     about: {
       title: "À propos | Technicien informatique Laval | Info Dorais",
@@ -192,7 +192,7 @@ export const pages = {
       h1: "Un support informatique humain, clair et orienté résultat.",
       lead:
         "Info Dorais transforme les problèmes informatiques en prochaines étapes simples, autant pour les particuliers que les PME.",
-      image: "/images/server-room.webp",
+      image: "/images/about-refresh.webp",
     },
     contact: {
       title: "Contact | Diagnostic informatique Laval | Info Dorais",
@@ -202,7 +202,7 @@ export const pages = {
       h1: "Décrivez le problème. On vous aide à choisir la bonne intervention.",
       lead:
         "Pour une urgence, l’appel est souvent le plus rapide. Pour un diagnostic moins urgent, envoyez les détails et on vous répond avec la suite logique.",
-      image: "/images/email.webp",
+      image: "/images/contact-refresh.webp",
     },
   },
   en: {
@@ -214,7 +214,7 @@ export const pages = {
       h1: "Computer repair and IT support without the runaround.",
       lead:
         "Slow PC, virus, Windows issue, unstable Wi-Fi or a reliable technician for your small business? Info Dorais diagnoses, repairs and explains the next steps clearly.",
-      image: "/images/hero.webp",
+      image: "/images/hero-refresh.webp",
     },
     services: {
       title: "IT Services Laval | Info Dorais",
@@ -224,7 +224,7 @@ export const pages = {
       h1: "IT services to fix, stabilize and prevent problems.",
       lead:
         "A clear offer for everyday needs: troubleshooting, maintenance, security, Windows, email, network and remote assistance.",
-      image: "/images/computer-repair.webp",
+      image: "/images/repair-refresh.webp",
     },
     repair: {
       title: "Computer Repair Laval | PC Repair Laval | Info Dorais",
@@ -234,7 +234,7 @@ export const pages = {
       h1: "Is your computer slow, frozen or refusing to start?",
       lead:
         "We identify the cause, protect your data when possible, then apply a realistic solution: repair, optimization, cleanup or Windows installation.",
-      image: "/images/computer-repair.webp",
+      image: "/images/repair-refresh.webp",
     },
     remote: {
       title: "Remote IT Support Laval | Info Dorais",
@@ -243,7 +243,7 @@ export const pages = {
       eyebrow: "Fast intervention",
       h1: "Remote IT support when the issue can be fixed without a visit.",
       lead: "Ideal for email, Windows, software, printers, configuration and step-by-step guidance.",
-      image: "/images/remote-support.webp",
+      image: "/images/remote-refresh.webp",
     },
     pme: {
       title: "Small Business IT Support Laval | Info Dorais",
@@ -253,7 +253,7 @@ export const pages = {
       h1: "An IT technician to keep your small business running.",
       lead:
         "Info Dorais helps small businesses with workstations, email, networks, backups, basic security and recurring support.",
-      image: "/images/network.webp",
+      image: "/images/pme-refresh.webp",
     },
     about: {
       title: "About | IT Technician Laval | Info Dorais",
@@ -263,7 +263,7 @@ export const pages = {
       h1: "Human, clear and result-focused IT support.",
       lead:
         "Info Dorais turns computer problems into simple next steps for both homes and small businesses.",
-      image: "/images/server-room.webp",
+      image: "/images/about-refresh.webp",
     },
     contact: {
       title: "Contact | Computer Diagnostic Laval | Info Dorais",
@@ -273,7 +273,7 @@ export const pages = {
       h1: "Describe the problem. We help you choose the right intervention.",
       lead:
         "For urgent issues, calling is often fastest. For a less urgent diagnostic, send the details and we will reply with the logical next step.",
-      image: "/images/email.webp",
+      image: "/images/contact-refresh.webp",
     },
   },
 } satisfies Record<Locale, Record<PageKey, {
@@ -351,6 +351,88 @@ export const processSteps = {
     ["Prevention", "You leave with simple recommendations to reduce repeat issues."],
   ],
 };
+
+export const localSeoTerms = {
+  fr: ["Réparation ordinateur Laval", "Technicien informatique Laval", "Support informatique Laval", "Réparation PC Laval"],
+  en: ["Computer repair Laval", "IT technician Laval", "IT support Laval", "PC repair Laval"],
+} satisfies Record<Locale, string[]>;
+
+export const faqByPage = {
+  fr: {
+    home: [
+      ["Est-ce qu’Info Dorais offre la réparation ordinateur à Laval?", "Oui. Info Dorais aide les particuliers et les PME à Laval pour les PC lents, virus, erreurs Windows, problèmes de démarrage, Wi-Fi et support informatique courant."],
+      ["Est-ce mieux d’appeler ou d’envoyer une demande de diagnostic?", "Pour une urgence, l’appel est le plus rapide. Pour expliquer un problème plus détaillé, le formulaire permet de préciser l’appareil, les symptômes et l’urgence."],
+      ["Le support peut-il se faire à distance?", "Oui, quand le problème le permet. Une session à distance peut aider pour Windows, courriel, logiciels, imprimantes et configuration simple."],
+    ],
+    services: [
+      ["Quels services informatiques sont offerts à Laval?", "Info Dorais offre réparation PC, soutien informatique, entretien, suppression de virus, installation Windows, support à distance et services pour PME."],
+      ["Est-ce que l’entretien informatique aide à prévenir les pannes?", "Oui. L’entretien permet de vérifier la santé du poste, nettoyer les éléments problématiques, optimiser Windows et recommander des mesures simples de prévention."],
+      ["Pouvez-vous aider une petite entreprise sans contrat compliqué?", "Oui. Le soutien PME peut être ponctuel ou récurrent, selon les postes, courriels, sauvegardes, réseau et priorités de l’entreprise."],
+    ],
+    repair: [
+      ["Quels problèmes de réparation PC peuvent être diagnostiqués?", "Un diagnostic peut viser un ordinateur lent, un démarrage difficile, des erreurs Windows, un bruit anormal, un disque défectueux, des virus ou un besoin de réinstallation."],
+      ["Mes données peuvent-elles être protégées pendant la réparation?", "Quand c’est possible, la protection ou le transfert de données est pris en compte avant les étapes plus lourdes comme une réinstallation Windows."],
+      ["Est-ce qu’un PC lent doit toujours être remplacé?", "Pas toujours. Un nettoyage, une optimisation, un remplacement de disque ou une installation Windows propre peut parfois redonner une bonne durée de vie au poste."],
+    ],
+    remote: [
+      ["Quels problèmes se règlent bien à distance?", "Le support à distance convient souvent pour courriel, Windows, logiciels, imprimantes, configuration, mises à jour et accompagnement pas à pas."],
+      ["Est-ce que le support à distance est sécuritaire?", "La session est encadrée, temporaire et expliquée. Vous gardez le contrôle de l’accès et pouvez fermer la connexion quand l’intervention est terminée."],
+      ["Quand faut-il plutôt une intervention sur place?", "Un problème matériel, une panne réseau locale ou un ordinateur qui ne démarre plus peut nécessiter une intervention physique au lieu d’une session à distance."],
+    ],
+    pme: [
+      ["Info Dorais peut-il soutenir une PME à Laval?", "Oui. Le soutien PME couvre les postes de travail, courriels professionnels, réseau, sauvegardes, entretien, sécurité de base et support aux utilisateurs."],
+      ["Le support PME peut-il être ponctuel?", "Oui. Une petite entreprise peut demander une intervention ponctuelle, puis décider si un suivi récurrent est utile selon ses besoins."],
+      ["Pourquoi documenter les interventions informatiques?", "Une documentation simple aide à retrouver les accès, comprendre les changements et réduire les pertes de temps lors d’un prochain problème."],
+    ],
+    about: [
+      ["Quelle est l’approche d’Info Dorais?", "L’approche est simple: comprendre le problème, expliquer les options, intervenir proprement et laisser des recommandations claires."],
+      ["Info Dorais travaille-t-il avec particuliers et PME?", "Oui. Les services sont adaptés autant aux particuliers qu’aux petites entreprises qui veulent un technicien informatique clair et accessible à Laval."],
+      ["Pourquoi choisir un technicien local à Laval?", "Un technicien local comprend mieux les besoins courants du secteur et peut guider le client vers le bon canal: appel, distance ou intervention."],
+    ],
+    contact: [
+      ["Que faut-il inclure dans une demande de diagnostic?", "Indiquez le type d’appareil, les symptômes, le moment où le problème a commencé, les messages d’erreur et votre niveau d’urgence."],
+      ["Quel est le moyen le plus rapide de contacter Info Dorais?", "Pour une urgence, appelez directement. Pour un diagnostic plus complet, le formulaire permet de transmettre les détails utiles."],
+      ["Le formulaire de contact est-il protégé contre le spam?", "Oui. Le site est prévu pour utiliser Cloudflare Turnstile afin de réduire les soumissions indésirables."],
+    ],
+  },
+  en: {
+    home: [
+      ["Does Info Dorais offer computer repair in Laval?", "Yes. Info Dorais helps homes and small businesses in Laval with slow PCs, viruses, Windows errors, startup issues, Wi-Fi and everyday IT support."],
+      ["Should I call or send a diagnostic request?", "For urgent issues, calling is fastest. For a detailed issue, the form helps describe the device, symptoms and urgency."],
+      ["Can support be done remotely?", "Yes, when the issue allows it. Remote support can help with Windows, email, software, printers and simple configuration."],
+    ],
+    services: [
+      ["What IT services are offered in Laval?", "Info Dorais offers PC repair, IT support, maintenance, virus removal, Windows installation, remote support and small business services."],
+      ["Can computer maintenance help prevent breakdowns?", "Yes. Maintenance can check workstation health, remove problematic items, optimize Windows and recommend simple prevention steps."],
+      ["Can you help a small business without a complicated contract?", "Yes. Small business support can be one-time or recurring depending on workstations, email, backups, network and business priorities."],
+    ],
+    repair: [
+      ["What PC repair issues can be diagnosed?", "A diagnostic can cover a slow computer, startup issues, Windows errors, abnormal noise, a failing drive, viruses or a Windows reinstall."],
+      ["Can my data be protected during repair?", "When possible, data protection or transfer is considered before heavier steps such as a Windows reinstall."],
+      ["Does a slow PC always need to be replaced?", "Not always. Cleanup, optimization, a drive replacement or a clean Windows installation can sometimes give the workstation a useful second life."],
+    ],
+    remote: [
+      ["Which issues are good for remote support?", "Remote support often works well for email, Windows, software, printers, configuration, updates and step-by-step guidance."],
+      ["Is remote support secure?", "The session is guided, temporary and explained. You keep control of access and can close the connection when the intervention is complete."],
+      ["When is an on-site visit better?", "Hardware issues, local network failures or a computer that will not start may require a physical intervention instead of remote support."],
+    ],
+    pme: [
+      ["Can Info Dorais support a small business in Laval?", "Yes. Small business support covers workstations, professional email, network, backups, maintenance, basic security and user support."],
+      ["Can business support be one-time?", "Yes. A small business can request a one-time intervention, then decide if recurring follow-up is useful."],
+      ["Why document IT interventions?", "Simple documentation helps recover access, understand changes and reduce wasted time during the next issue."],
+    ],
+    about: [
+      ["What is Info Dorais’ approach?", "The approach is simple: understand the issue, explain the options, intervene cleanly and leave clear recommendations."],
+      ["Does Info Dorais work with homes and small businesses?", "Yes. Services are adapted for both homes and small businesses looking for a clear and accessible IT technician in Laval."],
+      ["Why choose a local IT technician in Laval?", "A local technician better understands common needs in the area and can guide the client toward the right channel: call, remote or on-site."],
+    ],
+    contact: [
+      ["What should I include in a diagnostic request?", "Include the device type, symptoms, when the issue started, error messages and your level of urgency."],
+      ["What is the fastest way to contact Info Dorais?", "For urgent issues, call directly. For a more complete diagnostic, the form lets you share useful details."],
+      ["Is the contact form protected against spam?", "Yes. The site is prepared to use Cloudflare Turnstile to reduce unwanted submissions."],
+    ],
+  },
+} satisfies Record<Locale, Record<PageKey, [string, string][]>>;
 
 export const serviceDetails = {
   fr: [

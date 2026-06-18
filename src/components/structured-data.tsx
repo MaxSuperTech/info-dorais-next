@@ -1,4 +1,4 @@
-import { brand, type Locale } from "@/lib/site";
+import { brand, faqByPage, pages, paths, type Locale, type PageKey } from "@/lib/site";
 
 export function LocalBusinessJsonLd({ locale }: { locale: Locale }) {
   const data = {
@@ -38,4 +38,52 @@ export function LocalBusinessJsonLd({ locale }: { locale: Locale }) {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
   );
+}
+
+export function FaqJsonLd({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
+  const faqs = faqByPage[locale][pageKey];
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: answer,
+      },
+    })),
+  };
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+}
+
+export function ServiceJsonLd({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
+  if (!["services", "repair", "remote", "pme"].includes(pageKey)) {
+    return null;
+  }
+
+  const page = pages[locale][pageKey];
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: page.title.replace(" | Info Dorais", ""),
+    description: page.description,
+    image: `${brand.baseUrl}${page.image}`,
+    areaServed: {
+      "@type": "City",
+      name: "Laval",
+      addressRegion: "QC",
+      addressCountry: "CA",
+    },
+    provider: {
+      "@type": "LocalBusiness",
+      name: brand.name,
+      telephone: "+14502410302",
+      url: brand.baseUrl,
+    },
+    url: `${brand.baseUrl}${paths[pageKey][locale]}`,
+  };
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
 }
