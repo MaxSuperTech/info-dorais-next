@@ -94,25 +94,13 @@ export function SitePage({ locale, pageKey }: { locale: Locale; pageKey: PageKey
           </div>
 
           <aside className="motion-fade-left motion-delay-2 border border-border bg-card shadow-premium" aria-label={locale === "fr" ? "Résumé du diagnostic" : "Diagnostic summary"}>
-            <div className="relative aspect-[4/3] overflow-hidden border-b border-border bg-foreground">
-              <Image
-                src={page.image}
-                alt={page.title}
-                fill
-                priority={isHome}
-                sizes="(min-width: 1024px) 430px, 100vw"
-                className="image-drift object-cover opacity-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/30 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 z-30 border-t border-background/10 bg-foreground/95 p-5 text-background">
-                <span className="text-xs font-bold uppercase tracking-[0.14em] text-background/75">
-                  {locale === "fr" ? "Diagnostic express" : "Express diagnostic"}
-                </span>
-                <strong className="mt-2 block font-heading text-2xl leading-tight">
-                  {locale === "fr" ? "Comprendre vite. Réparer proprement." : "Understand quickly. Fix cleanly."}
-                </strong>
-              </div>
-            </div>
+            <HybridHeroVisual
+              locale={locale}
+              pageKey={pageKey}
+              image={page.image}
+              title={page.title}
+              priority={isHome}
+            />
             <div className="grid divide-y divide-border">
               {(locale === "fr"
                 ? [
@@ -142,6 +130,113 @@ export function SitePage({ locale, pageKey }: { locale: Locale; pageKey: PageKey
 
       {isContact ? <ContactSection locale={locale} /> : <PageBody locale={locale} pageKey={pageKey} />}
     </main>
+  );
+}
+
+function HybridHeroVisual({
+  locale,
+  pageKey,
+  image,
+  title,
+  priority,
+}: {
+  locale: Locale;
+  pageKey: PageKey;
+  image: string;
+  title: string;
+  priority: boolean;
+}) {
+  const config = getHeroVisual(locale, pageKey);
+  const Icon = config.Icon;
+  const positions = [
+    "left-4 top-5",
+    "right-4 top-8",
+    "left-4 bottom-32",
+    "right-4 bottom-36",
+  ];
+
+  return (
+    <div className="relative aspect-[4/3] overflow-hidden border-b border-border bg-foreground">
+      <Image
+        src={image}
+        alt={title}
+        fill
+        priority={priority}
+        sizes="(min-width: 1024px) 430px, 100vw"
+        className="image-drift object-cover opacity-70 saturate-[.88]"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(130deg,rgba(7,17,31,.92),rgba(7,17,31,.48)_48%,rgba(20,85,155,.12))]" />
+      <div className="hybrid-grid absolute inset-0" aria-hidden="true" />
+      <div className="absolute left-8 right-8 top-[45%] h-px bg-background/20" aria-hidden="true" />
+      <div className="absolute left-1/2 top-[45%] h-[31%] w-px -translate-x-1/2 bg-background/20" aria-hidden="true" />
+      <div className="hybrid-center absolute left-1/2 top-[45%] z-20 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-background/25 bg-background text-primary shadow-premium">
+        <Icon className="size-9" strokeWidth={1.8} aria-hidden="true" />
+      </div>
+
+      {config.nodes.map(([NodeIcon, label], index) => (
+        <div key={label} className={`hybrid-node absolute ${positions[index]} z-20 flex items-center gap-2 border border-background/20 bg-foreground/80 px-3 py-2 text-background shadow-line backdrop-blur`}>
+          <NodeIcon className="size-4 shrink-0 text-background" strokeWidth={1.8} aria-hidden="true" />
+          <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-background/80">{label}</span>
+        </div>
+      ))}
+
+      <div className="absolute bottom-0 left-0 right-0 z-30 border-t border-border bg-background/95 p-5 text-foreground backdrop-blur">
+        <span className="text-xs font-bold uppercase tracking-[0.14em] text-primary">
+          {locale === "fr" ? "Diagnostic express" : "Express diagnostic"}
+        </span>
+        <strong className="mt-2 block font-heading text-2xl leading-tight">
+          {locale === "fr" ? "Comprendre vite. Réparer proprement." : "Understand quickly. Fix cleanly."}
+        </strong>
+      </div>
+    </div>
+  );
+}
+
+function ContextServiceImage({
+  image,
+  title,
+  Icon,
+  items,
+  index,
+}: {
+  image: string;
+  title: string;
+  Icon: LucideIcon;
+  items: string[];
+  index: number;
+}) {
+  const bars = [
+    ["w-14", "w-9", "w-12"],
+    ["w-10", "w-16", "w-8"],
+    ["w-12", "w-8", "w-14"],
+    ["w-16", "w-10", "w-12"],
+  ][index % 4];
+
+  return (
+    <div className="relative h-44 overflow-hidden border-b border-border bg-foreground">
+      <Image
+        src={image}
+        alt={title}
+        fill
+        sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+        className="object-cover opacity-[.82] saturate-[.9] transition duration-500 group-hover:scale-[1.035] group-hover:opacity-100"
+      />
+      <div className="absolute inset-0 bg-gradient-to-tr from-foreground/92 via-foreground/34 to-primary/10" />
+      <div className="hybrid-grid absolute inset-0 opacity-60" aria-hidden="true" />
+      <div className="absolute inset-x-0 top-0 h-1 bg-primary" />
+      <div className="absolute left-4 top-4 flex size-12 items-center justify-center border border-background/20 bg-background text-primary shadow-line">
+        <Icon className="size-6" strokeWidth={1.8} aria-hidden="true" />
+      </div>
+      <div className="absolute right-4 top-4 grid gap-1.5" aria-hidden="true">
+        {bars.map((width, barIndex) => (
+          <span key={`${width}-${barIndex}`} className={`block h-1.5 ${width} bg-background/55`} />
+        ))}
+      </div>
+      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 border border-background/15 bg-foreground/85 px-3 py-2 text-background shadow-line backdrop-blur">
+        <span className="min-w-0 truncate text-xs font-bold uppercase tracking-[0.08em]">{items[0]}</span>
+        <ArrowRight className="size-4 shrink-0 text-primary" aria-hidden="true" />
+      </div>
+    </div>
   );
 }
 
@@ -186,15 +281,13 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
                 className="motion-card motion-fade-up group overflow-hidden shadow-none"
                 style={{ animationDelay: `${index * 70}ms` }}
               >
-                <div className="relative h-44 border-b border-border bg-foreground">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover opacity-90 transition duration-500 group-hover:scale-[1.035] group-hover:opacity-100"
-                  />
-                </div>
+                <ContextServiceImage
+                  image={service.image}
+                  title={service.title}
+                  Icon={service.icon}
+                  items={service.items}
+                  index={index}
+                />
                 <CardContent>
                   <service.icon className="mb-4 size-7 text-primary" aria-hidden="true" />
                   <h3 className="font-heading text-xl font-black">{service.title}</h3>
