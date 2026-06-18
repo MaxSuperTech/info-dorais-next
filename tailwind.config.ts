@@ -50,10 +50,12 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        premium: "0 24px 70px rgba(7, 17, 31, 0.12)",
+        premium: "0 28px 80px rgba(7, 17, 31, 0.16)",
+        line: "0 1px 0 rgba(15, 23, 42, 0.08)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "Helvetica Neue", "Helvetica", "Arial", "ui-sans-serif", "system-ui", "sans-serif"],
+        heading: ["var(--font-heading)", "Helvetica Neue", "Helvetica", "Arial", "ui-sans-serif", "system-ui", "sans-serif"],
       },
     },
   },

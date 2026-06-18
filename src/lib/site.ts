@@ -67,7 +67,6 @@ export const services = {
       title: "Réparation d’ordinateurs",
       text: "Diagnostic PC, lenteur, erreurs Windows, démarrage difficile, matériel et optimisation.",
       icon: Laptop,
-      image: "/images/computer-repair.webp",
       href: paths.repair.fr,
       items: ["Réparation PC Laval", "Installation Windows", "Transfert de données"],
     },
@@ -75,7 +74,6 @@ export const services = {
       title: "Suppression de virus",
       text: "Nettoyage des logiciels indésirables, vérification du navigateur et conseils de prévention.",
       icon: ShieldCheck,
-      image: "/images/security.webp",
       href: paths.services.fr,
       items: ["Analyse sécurité", "Nettoyage navigateur", "Protection de base"],
     },
@@ -83,7 +81,6 @@ export const services = {
       title: "Support à distance",
       text: "Assistance rapide pour courriel, Windows, logiciels, imprimante et petits blocages.",
       icon: MonitorCog,
-      image: "/images/remote-support.webp",
       href: paths.remote.fr,
       items: ["Assistance rapide", "AnyDesk au besoin", "Explications claires"],
     },
@@ -91,7 +88,6 @@ export const services = {
       title: "Services PME",
       text: "Postes, courriels professionnels, réseau, sauvegardes, entretien et accompagnement.",
       icon: Building2,
-      image: "/images/network.webp",
       href: paths.pme.fr,
       items: ["Support récurrent", "Prévention", "Documentation simple"],
     },
@@ -101,7 +97,6 @@ export const services = {
       title: "Computer repair",
       text: "PC diagnostics, slowdowns, Windows errors, startup issues, hardware and optimization.",
       icon: Laptop,
-      image: "/images/computer-repair.webp",
       href: paths.repair.en,
       items: ["PC repair Laval", "Windows installation", "Data transfer"],
     },
@@ -109,7 +104,6 @@ export const services = {
       title: "Virus removal",
       text: "Unwanted software cleanup, browser checks and prevention advice.",
       icon: ShieldCheck,
-      image: "/images/security.webp",
       href: paths.services.en,
       items: ["Security check", "Browser cleanup", "Basic protection"],
     },
@@ -117,7 +111,6 @@ export const services = {
       title: "Remote support",
       text: "Fast help for email, Windows, software, printers and everyday issues.",
       icon: MonitorCog,
-      image: "/images/remote-support.webp",
       href: paths.remote.en,
       items: ["Quick Assist", "AnyDesk when needed", "Clear explanations"],
     },
@@ -125,7 +118,6 @@ export const services = {
       title: "Small business services",
       text: "Workstations, professional email, network, backups, maintenance and guidance.",
       icon: Building2,
-      image: "/images/network.webp",
       href: paths.pme.en,
       items: ["Recurring support", "Prevention", "Simple documentation"],
     },
@@ -142,7 +134,6 @@ export const pages = {
       h1: "Réparation d’ordinateur et support informatique sans détour.",
       lead:
         "PC lent, virus, problème Windows, Wi-Fi instable ou besoin d’un technicien fiable pour votre PME? Info Dorais diagnostique, répare et explique clairement la suite.",
-      image: "/images/hero.webp",
     },
     services: {
       title: "Services informatiques Laval | Info Dorais",
@@ -152,7 +143,6 @@ export const pages = {
       h1: "Services informatiques pour régler, stabiliser et prévenir.",
       lead:
         "Une offre claire pour les besoins courants : dépannage, entretien, sécurité, Windows, courriels, réseau et assistance à distance.",
-      image: "/images/computer-repair.webp",
     },
     repair: {
       title: "Réparation ordinateur Laval | Réparation PC Laval | Info Dorais",
@@ -162,7 +152,6 @@ export const pages = {
       h1: "Votre ordinateur ralentit, bloque ou ne démarre plus?",
       lead:
         "On identifie la cause, on protège vos données quand c’est possible, puis on applique une solution réaliste : réparation, optimisation, nettoyage ou installation Windows.",
-      image: "/images/computer-repair.webp",
     },
     remote: {
       title: "Support à distance Laval | Info Dorais",
@@ -172,7 +161,6 @@ export const pages = {
       h1: "Support informatique à distance quand le problème peut se régler sans déplacement.",
       lead:
         "Idéal pour courriel, Windows, logiciels, imprimantes, configuration et accompagnement pas à pas.",
-      image: "/images/remote-support.webp",
     },
     pme: {
       title: "Support informatique PME Laval | Info Dorais",
@@ -182,7 +170,6 @@ export const pages = {
       h1: "Un technicien informatique pour garder votre petite entreprise fonctionnelle.",
       lead:
         "Info Dorais aide les PME avec les postes, courriels, réseau, sauvegardes, sécurité de base et support récurrent.",
-      image: "/images/network.webp",
     },
     about: {
       title: "À propos | Technicien informatique Laval | Info Dorais",
@@ -192,7 +179,6 @@ export const pages = {
       h1: "Un support informatique humain, clair et orienté résultat.",
       lead:
         "Info Dorais transforme les problèmes informatiques en prochaines étapes simples, autant pour les particuliers que les PME.",
-      image: "/images/server-room.webp",
     },
     contact: {
       title: "Contact | Diagnostic informatique Laval | Info Dorais",
@@ -202,7 +188,6 @@ export const pages = {
       h1: "Décrivez le problème. On vous aide à choisir la bonne intervention.",
       lead:
         "Pour une urgence, l’appel est souvent le plus rapide. Pour un diagnostic moins urgent, envoyez les détails et on vous répond avec la suite logique.",
-      image: "/images/email.webp",
     },
   },
   en: {
@@ -214,7 +199,6 @@ export const pages = {
       h1: "Computer repair and IT support without the runaround.",
       lead:
         "Slow PC, virus, Windows issue, unstable Wi-Fi or a reliable technician for your small business? Info Dorais diagnoses, repairs and explains the next steps clearly.",
-      image: "/images/hero.webp",
     },
     services: {
       title: "IT Services Laval | Info Dorais",
@@ -224,7 +208,6 @@ export const pages = {
       h1: "IT services to fix, stabilize and prevent problems.",
       lead:
         "A clear offer for everyday needs: troubleshooting, maintenance, security, Windows, email, network and remote assistance.",
-      image: "/images/computer-repair.webp",
     },
     repair: {
       title: "Computer Repair Laval | PC Repair Laval | Info Dorais",
@@ -234,7 +217,6 @@ export const pages = {
       h1: "Is your computer slow, frozen or refusing to start?",
       lead:
         "We identify the cause, protect your data when possible, then apply a realistic solution: repair, optimization, cleanup or Windows installation.",
-      image: "/images/computer-repair.webp",
     },
     remote: {
       title: "Remote IT Support Laval | Info Dorais",
@@ -243,7 +225,6 @@ export const pages = {
       eyebrow: "Fast intervention",
       h1: "Remote IT support when the issue can be fixed without a visit.",
       lead: "Ideal for email, Windows, software, printers, configuration and step-by-step guidance.",
-      image: "/images/remote-support.webp",
     },
     pme: {
       title: "Small Business IT Support Laval | Info Dorais",
@@ -253,7 +234,6 @@ export const pages = {
       h1: "An IT technician to keep your small business running.",
       lead:
         "Info Dorais helps small businesses with workstations, email, networks, backups, basic security and recurring support.",
-      image: "/images/network.webp",
     },
     about: {
       title: "About | IT Technician Laval | Info Dorais",
@@ -263,7 +243,6 @@ export const pages = {
       h1: "Human, clear and result-focused IT support.",
       lead:
         "Info Dorais turns computer problems into simple next steps for both homes and small businesses.",
-      image: "/images/server-room.webp",
     },
     contact: {
       title: "Contact | Computer Diagnostic Laval | Info Dorais",
@@ -273,7 +252,6 @@ export const pages = {
       h1: "Describe the problem. We help you choose the right intervention.",
       lead:
         "For urgent issues, calling is often fastest. For a less urgent diagnostic, send the details and we will reply with the logical next step.",
-      image: "/images/email.webp",
     },
   },
 } satisfies Record<Locale, Record<PageKey, {
@@ -282,7 +260,6 @@ export const pages = {
   eyebrow: string;
   h1: string;
   lead: string;
-  image: string;
 }>>;
 
 export const common = {
@@ -300,7 +277,7 @@ export const common = {
     email: "Courriel",
     phone: "Téléphone",
     message: "Description",
-    submit: "Préparer la demande",
+    submit: "Envoyer la demande",
     area: "Laval et environs",
     themeDark: "Activer le thème sombre",
     themeLight: "Activer le thème clair",

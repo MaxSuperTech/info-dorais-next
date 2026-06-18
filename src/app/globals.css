@@ -4,22 +4,22 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 215 58% 8%;
+    --background: 210 45% 98%;
+    --foreground: 218 56% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 215 58% 8%;
+    --card-foreground: 218 56% 9%;
     --primary: 211 78% 34%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 211 36% 93%;
-    --secondary-foreground: 215 58% 8%;
-    --muted: 212 28% 92%;
-    --muted-foreground: 215 17% 39%;
-    --accent: 210 52% 94%;
+    --secondary: 212 34% 93%;
+    --secondary-foreground: 218 56% 9%;
+    --muted: 214 32% 92%;
+    --muted-foreground: 216 17% 35%;
+    --accent: 210 60% 94%;
     --accent-foreground: 211 78% 26%;
     --border: 214 27% 87%;
     --input: 214 27% 87%;
     --ring: 211 78% 34%;
-    --radius: 0.5rem;
+    --radius: 0.16rem;
   }
 
   .dark {
@@ -50,6 +50,14 @@
 
   body {
     @apply bg-background font-sans text-foreground antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
   }
 
   ::selection {
@@ -59,19 +67,19 @@
 
 @layer components {
   .section {
-    @apply py-16 sm:py-20;
+    @apply py-16 sm:py-24;
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-primary;
+    @apply inline-flex items-center gap-2 border-l-2 border-primary bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-primary;
   }
 
   .eyebrow::before {
     content: "";
-    @apply size-2 rounded-full bg-primary;
+    @apply size-2 bg-primary;
   }
 
   .focus-card {
-    @apply rounded-lg border border-border bg-card shadow-sm transition-colors duration-200 hover:border-primary/35;
+    @apply border border-border bg-card shadow-sm transition-colors duration-200 hover:border-primary/40;
   }
 }

@@ -14,8 +14,8 @@ export function FormStatus({ locale }: { locale: Locale }) {
     <div
       className={
         sent
-          ? "mt-5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm font-semibold text-emerald-700 dark:text-emerald-300"
-          : "mt-5 rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-sm font-semibold text-red-700 dark:text-red-300"
+          ? "mt-5 rounded-sm border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm font-semibold text-emerald-700 dark:text-emerald-300"
+          : "mt-5 rounded-sm border border-red-500/30 bg-red-500/10 p-4 text-sm font-semibold text-red-700 dark:text-red-300"
       }
       role="status"
     >

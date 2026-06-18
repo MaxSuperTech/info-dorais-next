@@ -11,9 +11,9 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
         <div>
           <strong className="text-sm text-foreground">Navigation</strong>
-          <div className="mt-3 grid gap-2 text-sm text-muted-foreground">
+          <div className="mt-3 grid text-sm text-muted-foreground">
             {nav[locale].slice(1, 5).map(([label, key]) => (
-              <Link key={key} href={paths[key][locale]} className="hover:text-primary">
+              <Link key={key} href={paths[key][locale]} className="min-h-11 py-2 hover:text-primary">
                 {label}
               </Link>
             ))}
@@ -21,10 +21,10 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
         <div>
           <strong className="text-sm text-foreground">Contact</strong>
-          <div className="mt-3 grid gap-2 text-sm text-muted-foreground">
-            <a href={brand.phoneHref} className="hover:text-primary">{brand.phone}</a>
-            <a href={brand.emailHref} className="hover:text-primary">{brand.email}</a>
-            <span>{common[locale].area}</span>
+          <div className="mt-3 grid text-sm text-muted-foreground">
+            <a href={brand.phoneHref} className="min-h-11 py-2 hover:text-primary">{brand.phone}</a>
+            <a href={brand.emailHref} className="min-h-11 py-2 hover:text-primary">{brand.email}</a>
+            <span className="py-2">{common[locale].area}</span>
           </div>
         </div>
       </div>

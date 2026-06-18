@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { HtmlLangSync } from "@/components/html-lang-sync";
@@ -10,6 +10,12 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-heading",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr-CA" suppressHydrationWarning>
-      <body className={inter.variable}>
+      <body className={`${inter.variable} ${jakarta.variable}`}>
         <ThemeProvider>
           <HtmlLangSync />
           {children}
