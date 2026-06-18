@@ -1,0 +1,98 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { brand, faqs, otherLocale, pages, paths, type Locale, type PageKey } from "@/data/site";
+import "@/styles/global.css";
+
+const { locale, pageKey } = Astro.props as { locale: Locale; pageKey: PageKey };
+const page = pages[locale][pageKey];
+const canonical = `${brand.baseUrl}${paths[pageKey][locale]}`;
+const altLocale = otherLocale(locale);
+const ogImage = `${brand.baseUrl}${page.image}`;
+
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: brand.name,
+  image: `${brand.baseUrl}${brand.logo}`,
+  url: brand.baseUrl,
+  telephone: "+14502410302",
+  email: brand.email,
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: brand.city,
+    addressRegion: brand.region,
+    addressCountry: brand.country,
+  },
+  areaServed: brand.areaServed,
+  description: page.description,
+  makesOffer: [
+    "Réparation ordinateur Laval",
+    "Support informatique Laval",
+    "Technicien informatique Laval",
+    "Support informatique à distance Québec",
+    "Support informatique PME Laval",
+    "Courriel professionnel",
+  ],
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs[locale].map(([question, answer]) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: answer,
+    },
+  })),
+};
+---
+
+<!doctype html>
+<html lang={locale === "fr" ? "fr-CA" : "en-CA"}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{page.title}</title>
+    <meta name="description" content={page.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="fr-CA" href={`${brand.baseUrl}${paths[pageKey].fr}`} />
+    <link rel="alternate" hreflang="en-CA" href={`${brand.baseUrl}${paths[pageKey].en}`} />
+    <link rel="alternate" hreflang="x-default" href={`${brand.baseUrl}${paths[pageKey].fr}`} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={page.title} />
+    <meta property="og:description" content={page.description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={brand.name} />
+    <meta property="og:locale" content={locale === "fr" ? "fr_CA" : "en_CA"} />
+    <meta property="og:locale:alternate" content={altLocale === "fr" ? "fr_CA" : "en_CA"} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content={brand.primary} />
+    <link rel="icon" href={brand.logo} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Inter+Tight:wght@700;800;900&display=swap" rel="stylesheet" />
+    <script is:inline>
+      (() => {
+        const storedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.classList.toggle("dark", (storedTheme || (prefersDark ? "dark" : "light")) === "dark");
+      })();
+    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)} />
+    {(pageKey === "home" || pageKey === "faq" || pageKey === "contact") && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    )}
+    <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  </head>
+  <body>
+    <Header locale={locale} pageKey={pageKey} />
+    <slot />
+    <Footer locale={locale} />
+  </body>
+</html>

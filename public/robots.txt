@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://infodorais.com/sitemap-index.xml

@@ -4,7 +4,7 @@ import { PNG } from "pngjs";
 
 const root = process.cwd();
 const logoPath = path.join(root, "public", "images", "logo.png");
-const outputPath = path.join(root, "src", "lib", "brand-colors.ts");
+const outputPath = path.join(root, "src", "data", "brand-colors.ts");
 
 const buffer = fs.readFileSync(logoPath);
 const png = PNG.sync.read(buffer);

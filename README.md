@@ -1,140 +1,181 @@
-# Info Dorais Next.js
+# Info Dorais Astro
 
-Refonte complète du site Info Dorais en Next.js 15, TypeScript, Tailwind CSS, shadcn/ui et Lucide Icons.
+Refonte complète du site Info Dorais en Astro, TypeScript et Tailwind CSS.
 
-## Audit de l'ancien site
+Cette version est 100% statique pour la production: le build génère un dossier `dist/` que tu peux copier directement dans le `public_html` de HestiaCP/Apache. Aucun serveur Node.js n'est nécessaire en production.
 
-Forces observées :
-- Coordonnées claires : téléphone, courriel, heures, Facebook.
-- Bilingue FR/EN déjà prévu.
-- Thème clair/sombre déjà présent.
-- Services importants déjà listés : support, distance, courriel, réseau, sécurité, serveurs.
-- Base SEO locale avec schema LocalBusiness.
+## Analyse de l'ancien site
 
-Faiblesses observées :
-- Premier écran trop général pour convertir rapidement.
-- Pages pas assez alignées sur les requêtes locales fortes.
-- CTA dispersés entre services, soumission et contact.
-- Usage d'emojis au lieu d'icônes professionnelles.
-- Architecture incomplète pour les intentions "réparation ordinateur", "support à distance" et "PME".
+Forces conservées comme référence :
+
+- Coordonnées claires: téléphone, courriel et formulaire.
+- Présence FR/EN déjà importante.
+- Thème clair/sombre déjà attendu.
+- Services pertinents: réparation, support à distance, courriel, sécurité, réseau, serveurs/VPS.
+- Base SEO locale avec sitemap, robots et données structurées.
+
+Faiblesses corrigées :
+
+- Premier écran pas assez orienté appel/diagnostic.
+- Architecture trop mince pour les intentions Google locales.
+- Pages manquantes pour réparation ordinateur, entretien, PME, courriel et FAQ.
+- Design trop générique et moins professionnel.
+- Ancienne structure PHP difficile à faire évoluer proprement.
+- CTA dispersés au lieu d'un parcours clair.
 
 ## Nouvelle architecture
 
-- `/` : accueil conversion locale.
-- `/services` : vue complète des services.
-- `/reparation-ordinateur` : page SEO pour réparation ordinateur Laval / réparation PC Laval.
-- `/support-distance` : page pour Assistance rapide et AnyDesk.
-- `/pme` : services pour petites entreprises.
+- `/` : accueil orientée conversion locale.
+- `/services` : liste complète des services.
+- `/reparation-ordinateur` : SEO réparation ordinateur Laval / réparation PC Laval.
+- `/support-distance` : support informatique à distance.
+- `/entretien-optimisation` : entretien, optimisation, prévention.
+- `/pme` : services pour PME et travailleurs autonomes.
+- `/courriel-solutions-web` : courriel professionnel, Microsoft 365, Google Workspace, web/VPS simple.
 - `/apropos` : crédibilité et approche.
-- `/contact` : appel, courriel et diagnostic.
+- `/faq` : contenu SEO et objections fréquentes.
+- `/contact` : appel, courriel, formulaire de diagnostic.
+- `/politique-confidentialite` : confidentialité.
 - `/en/...` : versions anglaises équivalentes.
 
-## Installation
+## SEO inclus
 
-```bash
-npm install
-npm run build
-npm run start
-```
+- Titres et descriptions uniques par page.
+- Canonical et hreflang FR/EN.
+- Sitemap généré automatiquement.
+- `robots.txt`.
+- JSON-LD `LocalBusiness`.
+- JSON-LD `FAQPage` sur les pages pertinentes.
+- Ciblage local: Laval, Montréal, Rive-Nord, Terrebonne, Blainville, Boisbriand, Sainte-Thérèse, Rosemère, Mascouche, Repentigny, Saint-Eustache et environs.
 
-Le site démarre par défaut sur `http://localhost:3000`.
-
-## Déploiement VPS Debian avec HestiaCP et Nginx reverse proxy
-
-1. Créer le domaine dans HestiaCP.
-2. Installer Node.js LTS sur le VPS.
-3. Copier ce dossier dans un chemin comme :
-
-```bash
-/home/USER/web/infodorais.com/app
-```
-
-4. Installer et builder :
-
-```bash
-cd /home/USER/web/infodorais.com/app
-npm install
-npm run build
-PORT=3000 npm run start
-```
-
-5. Pour garder le processus actif, utiliser `pm2` :
-
-```bash
-npm install -g pm2
-PORT=3000 pm2 start npm --name infodorais -- run start
-pm2 save
-pm2 startup
-```
-
-6. Dans le template Nginx HestiaCP du domaine, ajouter un reverse proxy vers Next.js :
-
-```nginx
-location / {
-    proxy_pass http://127.0.0.1:3000;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-}
-```
-
-7. Redémarrer Nginx depuis HestiaCP ou avec :
-
-```bash
-sudo systemctl reload nginx
-```
-
-## Option export statique
-
-Le formulaire utilise `contact.php`, copié dans `out/`, pour rester compatible avec un hébergement HestiaCP dans `public_html`.
-
-## Activer le CAPTCHA
-
-Le site utilise Cloudflare Turnstile.
-
-1. Créer un widget Turnstile dans Cloudflare.
-2. Remplacer dans `src/components/site-page.tsx` :
-
-```ts
-const turnstileSiteKey = "REMPLACE_PAR_TA_CLE_SITE_TURNSTILE";
-```
-
-3. Remplacer dans `public/contact.php` :
-
-```php
-$turnstileSecret = 'REMPLACE_PAR_TA_CLE_SECRETE_TURNSTILE';
-```
-
-4. Rebuilder/exporter le site, puis envoyer le contenu de `out/` dans `public_html`.
-
-Sur Linux/Debian :
-
-```bash
-NEXT_OUTPUT=export npm run build
-```
-
-Les fichiers statiques seront dans `out/`. Ils peuvent être servis directement par Nginx/HestiaCP sans Node.js.
-
-Sur Windows PowerShell :
-
-```powershell
-$env:NEXT_OUTPUT="export"; npm run build
-```
+Les choix SEO suivent les recommandations Google Search Central pour les bases SEO, les données structurées et le type `LocalBusiness`.
 
 ## Branding
 
-La couleur officielle est extraite du logo avec :
+La couleur officielle est extraite automatiquement du logo :
 
 ```bash
 npm run extract:brand
 ```
 
-Le résultat est écrit dans `src/lib/brand-colors.ts` et utilisé par le site. La couleur extraite actuellement est `#14559b`, très proche du bleu moyen calculé `#13549c`.
+Le résultat est écrit dans `src/data/brand-colors.ts`.
+Couleur extraite actuellement: `#14559b`.
 
-## Typographie
+## Installation locale
 
-Le site utilise Google Font **Inter** via `next/font/google`. Next.js l’optimise et la sert localement au build, avec `Helvetica Neue`, `Helvetica` et `Arial` en fallback.
+```bash
+npm install
+npm run extract:brand
+npm run build
+npm run start
+```
+
+`npm run start` lance un preview local Astro. Pour développer :
+
+```bash
+npm run dev
+```
+
+## Vérifications
+
+```bash
+npm run check
+npm run build
+npm audit
+```
+
+État actuel validé :
+
+- `npm run check` : 0 erreur, 0 warning, 0 hint.
+- `npm run build` : 22 pages statiques générées.
+- `npm audit` : 0 vulnérabilité.
+
+## Déploiement HestiaCP / Apache
+
+Build local ou sur le VPS :
+
+```bash
+npm install
+npm run extract:brand
+npm run build
+```
+
+Copier le contenu de `dist/` dans le `public_html` du domaine :
+
+```bash
+rsync -av --delete dist/ /home/USER/web/infodorais.com/public_html/
+```
+
+Ou avec `scp` depuis ta machine :
+
+```bash
+scp -r dist/* USER@IP_DU_SERVEUR:/home/USER/web/infodorais.com/public_html/
+```
+
+Important: copier le contenu de `dist/`, pas le dossier `dist` lui-même.
+
+Le fichier `public/contact.php` est copié automatiquement dans `dist/contact.php`, donc le formulaire fonctionne sur un hébergement Apache/PHP HestiaCP.
+
+## Apache
+
+HestiaCP sert normalement `public_html` avec Apache/PHP. Cette version n'a pas besoin de reverse proxy Node.
+
+Si les URLs propres ne répondent pas correctement, vérifier que le domaine HestiaCP sert bien les dossiers `index.html` générés par Astro, par exemple :
+
+- `/services/index.html`
+- `/contact/index.html`
+- `/en/index.html`
+
+## Option Nginx reverse proxy
+
+Pour cette version statique, le reverse proxy n'est pas recommandé ni nécessaire.
+
+Si tu décides quand même de lancer `npm run start` sur le VPS, ce serait seulement un serveur de preview Astro. Dans ce cas, Nginx pourrait pointer vers le port choisi, mais ce n'est pas le déploiement prévu pour la production.
+
+## Formulaire de contact
+
+Le formulaire poste vers :
+
+```txt
+/contact.php
+```
+
+À configurer avant mise en production :
+
+1. Dans `src/components/ContactForm.astro`, remplacer :
+
+```ts
+const turnstileSiteKey = "REMPLACE_PAR_TA_CLE_SITE_TURNSTILE";
+```
+
+2. Dans `public/contact.php`, remplacer :
+
+```php
+$turnstileSecret = 'REMPLACE_PAR_TA_CLE_SECRETE_TURNSTILE';
+```
+
+3. Rebuilder :
+
+```bash
+npm run build
+```
+
+4. Copier `dist/` vers `public_html`.
+
+Le serveur doit pouvoir envoyer du courriel avec PHP `mail()`. Sur HestiaCP, vérifier que le service mail du domaine est configuré correctement.
+
+## Thème et langue
+
+- Sélecteur FR/EN inclus.
+- Thème clair/sombre inclus.
+- Le thème est sauvegardé dans `localStorage`.
+- Navigation mobile responsive avec menu.
+
+## Fichiers importants
+
+- `src/data/site.ts` : contenu, routes, SEO, services, FAQ.
+- `src/components/Header.astro` : navigation, langue, thème.
+- `src/components/ContactForm.astro` : formulaire et Turnstile.
+- `public/contact.php` : traitement du formulaire.
+- `astro.config.mjs` : configuration Astro et sitemap.
+- `dist/` : résultat du build à envoyer dans `public_html`.

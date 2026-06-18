@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --background: 210 45% 98%;
+  --foreground: 218 56% 9%;
+  --card: 0 0% 100%;
+  --primary: 211 78% 34%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 212 34% 93%;
+  --secondary-foreground: 218 56% 9%;
+  --muted: 214 32% 92%;
+  --muted-foreground: 216 17% 35%;
+  --accent: 210 60% 94%;
+  --accent-foreground: 211 78% 26%;
+  --border: 214 27% 87%;
+  --input: 214 27% 87%;
+  --ring: 211 78% 34%;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: 215 58% 8%;
+  --foreground: 210 40% 96%;
+  --card: 215 45% 12%;
+  --primary: 211 78% 52%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 215 35% 17%;
+  --secondary-foreground: 210 40% 96%;
+  --muted: 215 35% 17%;
+  --muted-foreground: 214 20% 72%;
+  --accent: 215 35% 18%;
+  --accent-foreground: 210 40% 96%;
+  --border: 215 28% 22%;
+  --input: 215 28% 22%;
+  --ring: 211 78% 58%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: Inter, "Helvetica Neue", Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a,
+button,
+summary {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+@layer components {
+  .section {
+    @apply py-16 sm:py-24;
+  }
+
+  .badge {
+    @apply inline-flex items-center border-l-2 border-primary bg-primary/10 px-3 py-1 text-xs font-black uppercase tracking-[0.08em] text-primary;
+  }
+
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 border border-border px-5 py-3 text-sm font-black transition duration-200;
+  }
+
+  .btn-primary {
+    @apply border-primary bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:border-primary/40 hover:bg-accent;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(hsl(var(--primary)), hsl(var(--primary)));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 2px;
+    transition: background-size 180ms ease, color 180ms ease;
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 2px;
+  }
+
+  .card {
+    @apply border border-border bg-card shadow-sm transition duration-200;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:border-primary/45 hover:shadow-premium;
+  }
+
+  .field {
+    @apply grid gap-2;
+  }
+
+  .field label {
+    @apply text-sm font-black;
+  }
+
+  .field input,
+  .field textarea {
+    @apply min-h-12 border border-input bg-background px-4 py-3 text-base outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20;
+  }
+
+  .field textarea {
+    @apply min-h-36 resize-y;
+  }
+
+  .visual-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes soft-scan {
+  0% {
+    transform: translateX(-120%);
+  }
+  55%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.reveal {
+  animation: fade-up 560ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.visual-scan::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, hsl(var(--primary) / .18) 50%, transparent 76%);
+  animation: soft-scan 6s ease-in-out infinite;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

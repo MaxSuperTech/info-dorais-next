@@ -1,0 +1,87 @@
+---
+import Icon from "@/components/Icon.astro";
+import { brand, nav, otherLocale, paths, ui, type Locale, type PageKey } from "@/data/site";
+
+const { locale, pageKey } = Astro.props as { locale: Locale; pageKey: PageKey };
+const t = ui[locale];
+const lang = otherLocale(locale);
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
+  <div class="container flex min-h-[76px] items-center justify-between gap-4">
+    <a href={paths.home[locale]} class="flex min-w-0 items-center gap-3" aria-label={brand.name}>
+      <img src={brand.logo} alt={`Logo ${brand.name}`} width="52" height="52" class="size-11 shrink-0 object-contain" />
+      <span class="min-w-0">
+        <strong class="block whitespace-nowrap text-sm font-black leading-none">{brand.name}</strong>
+        <span class="mt-1 block whitespace-nowrap text-[11px] font-semibold text-muted-foreground">
+          {locale === "fr" ? "Technicien informatique à Laval" : "IT technician in Laval"}
+        </span>
+      </span>
+    </a>
+
+    <button id="menu-toggle" class="btn btn-secondary size-11 p-0 xl:hidden" type="button" aria-expanded="false" aria-controls="site-menu">
+      <span class="sr-only">{t.menu}</span>
+      <span class="menu-icon block h-4 w-5 border-y-2 border-current transition"></span>
+    </button>
+
+    <div id="site-menu" class="menu-panel absolute left-0 right-0 top-[76px] hidden border-b border-border bg-background p-4 shadow-premium xl:static xl:flex xl:items-center xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none">
+      <nav class="grid gap-1 xl:flex xl:items-center xl:gap-1" aria-label={locale === "fr" ? "Navigation principale" : "Main navigation"}>
+        {nav[locale].map((item) => (
+          <a
+            href={paths[item.key][locale]}
+            class:list={[
+              "link-underline flex min-h-11 items-center whitespace-nowrap border-l-2 border-transparent px-3 py-2 text-sm font-black text-muted-foreground transition hover:text-foreground xl:min-h-0 xl:border-l-0 xl:px-2.5 xl:py-6",
+              item.key === pageKey && "border-primary bg-accent text-primary xl:bg-transparent",
+            ]}
+            aria-current={item.key === pageKey ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="mt-4 grid grid-cols-2 gap-2 xl:ml-4 xl:mt-0 xl:flex xl:items-center">
+        <a class="btn btn-secondary col-span-2 xl:col-span-1" href={brand.phoneHref}>
+          <Icon name="phone" class="size-4" />
+          {locale === "fr" ? "Appeler" : "Call"}
+        </a>
+        <a class="btn btn-primary col-span-2 xl:col-span-1" href={`${paths.contact[locale]}#diagnostic`}>
+          {locale === "fr" ? "Diagnostic" : "Diagnostic"}
+        </a>
+        <a class="btn btn-secondary" href={paths[pageKey][lang]} hreflang={lang === "fr" ? "fr-CA" : "en-CA"}>
+          {lang.toUpperCase()}
+        </a>
+        <button id="theme-toggle" class="btn btn-secondary" type="button" aria-label={t.theme}>
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    const storedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const applyTheme = (theme) => {
+      root.classList.toggle("dark", theme === "dark");
+      root.classList.toggle("light", theme !== "dark");
+      localStorage.setItem("theme", theme);
+    };
+    applyTheme(storedTheme || (prefersDark ? "dark" : "light"));
+
+    const menuButton = document.getElementById("menu-toggle");
+    const menu = document.getElementById("site-menu");
+    menuButton?.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+      menu?.classList.toggle("hidden", isOpen);
+      menu?.classList.toggle("block", !isOpen);
+    });
+
+    document.getElementById("theme-toggle")?.addEventListener("click", () => {
+      applyTheme(root.classList.contains("dark") ? "light" : "dark");
+    });
+  })();
+</script>

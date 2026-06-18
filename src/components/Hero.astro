@@ -1,0 +1,60 @@
+---
+import Icon from "@/components/Icon.astro";
+import { brand, paths, processSteps, ui, type Locale, type Page, type PageKey } from "@/data/site";
+
+const { locale, page, pageKey } = Astro.props as { locale: Locale; page: Page; pageKey: PageKey };
+const t = ui[locale];
+const steps = processSteps[locale];
+---
+
+<section class="relative overflow-hidden border-b border-border bg-background">
+  <div class="absolute inset-x-0 top-0 h-1.5 bg-primary"></div>
+  <div class="absolute inset-0 bg-[linear-gradient(115deg,rgba(20,85,155,.11),transparent_35%),radial-gradient(circle_at_85%_18%,rgba(20,85,155,.14),transparent_30%)]"></div>
+  <div class="container relative grid min-h-[calc(100dvh-76px)] items-center gap-10 py-12 lg:grid-cols-[minmax(0,1.08fr)_390px] lg:py-14 xl:grid-cols-[minmax(0,1fr)_430px]">
+    <div class="max-w-4xl reveal">
+      <span class="badge">{page.eyebrow}</span>
+      <h1 class="mt-5 font-heading text-4xl font-black leading-[1.04] sm:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">{page.h1}</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">{page.lead}</p>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <a class="btn btn-primary w-full sm:w-auto" href={brand.phoneHref}>
+          <Icon name="phone" class="size-5" />
+          {t.call}: {brand.phone}
+        </a>
+        <a class="btn btn-secondary w-full sm:w-auto" href={`${paths.contact[locale]}#diagnostic`}>
+          {t.diagnostic}
+          <Icon name="arrow" class="size-5" />
+        </a>
+      </div>
+      <div class="mt-9 grid border-y border-border sm:grid-cols-3">
+        {steps.map(([title, text]) => (
+          <div class="border-b border-border py-4 sm:border-b-0 sm:border-r sm:px-4 first:sm:pl-0 last:sm:border-r-0">
+            <strong class="block text-sm font-black">{title}</strong>
+            <span class="mt-1 block text-xs leading-5 text-muted-foreground">{text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <aside class="card overflow-hidden shadow-premium reveal" aria-label={locale === "fr" ? "Résumé visuel du service" : "Visual service summary"}>
+      <div class="relative aspect-[4/3] overflow-hidden bg-foreground">
+        <img src={page.image} alt={page.title} width="900" height="675" class="h-full w-full object-cover opacity-75 saturate-[.9]" loading={pageKey === "home" ? "eager" : "lazy"} />
+        <div class="absolute inset-0 bg-[linear-gradient(130deg,rgba(7,17,31,.9),rgba(7,17,31,.45)_50%,rgba(20,85,155,.12))]"></div>
+        <div class="visual-grid visual-scan absolute inset-0 opacity-70"></div>
+        <div class="absolute left-5 top-5 border border-background/20 bg-background px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-primary">
+          {locale === "fr" ? "Diagnostic" : "Diagnostic"}
+        </div>
+        <div class="absolute right-5 top-16 border border-background/20 bg-foreground/80 px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-background">
+          {locale === "fr" ? "Solution claire" : "Clear solution"}
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 border-t border-background/10 bg-background/95 p-5 text-foreground backdrop-blur">
+          <span class="text-xs font-black uppercase tracking-[0.14em] text-primary">
+            {locale === "fr" ? "Réponse rapide" : "Fast response"}
+          </span>
+          <strong class="mt-2 block font-heading text-2xl leading-tight">
+            {locale === "fr" ? "Comprendre vite. Régler proprement." : "Understand quickly. Fix cleanly."}
+          </strong>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>

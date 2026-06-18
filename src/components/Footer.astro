@@ -1,0 +1,50 @@
+---
+import Icon from "@/components/Icon.astro";
+import { brand, nav, paths, ui, type Locale } from "@/data/site";
+
+const { locale } = Astro.props as { locale: Locale };
+const t = ui[locale];
+---
+
+<footer class="border-t border-border bg-foreground text-background">
+  <div class="container grid gap-10 py-12 lg:grid-cols-[1.15fr_.85fr_.85fr]">
+    <div>
+      <div class="flex items-center gap-3">
+        <img src={brand.logo} alt={`Logo ${brand.name}`} width="54" height="54" class="size-12 object-contain" />
+        <div>
+          <strong class="block text-lg font-black">{brand.name}</strong>
+          <span class="text-sm text-background/70">
+            {locale === "fr" ? "Service informatique simple, humain et efficace." : "Simple, human and efficient IT service."}
+          </span>
+        </div>
+      </div>
+      <p class="mt-5 max-w-lg text-sm leading-7 text-background/72">
+        {locale === "fr"
+          ? "Réparation ordinateur, soutien informatique, support à distance, entretien, courriel professionnel et accompagnement PME à Laval et environs."
+          : "Computer repair, IT support, remote support, maintenance, business email and small business guidance in Laval and nearby areas."}
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-black uppercase tracking-[0.12em] text-background/60">{locale === "fr" ? "Navigation" : "Navigation"}</h2>
+      <div class="mt-4 grid gap-2">
+        {nav[locale].map((item) => (
+          <a class="link-underline w-fit text-sm text-background/78 hover:text-background" href={paths[item.key][locale]}>{item.label}</a>
+        ))}
+        <a class="link-underline w-fit text-sm text-background/78 hover:text-background" href={paths.privacy[locale]}>{t.privacy}</a>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-black uppercase tracking-[0.12em] text-background/60">{locale === "fr" ? "Contact" : "Contact"}</h2>
+      <div class="mt-4 grid gap-3 text-sm text-background/78">
+        <a class="flex items-center gap-2 hover:text-background" href={brand.phoneHref}><Icon name="phone" class="size-4" /> {brand.phone}</a>
+        <a class="flex items-center gap-2 hover:text-background" href={brand.emailHref}><Icon name="mail" class="size-4" /> {brand.email}</a>
+        <span class="flex items-center gap-2"><Icon name="globe" class="size-4" /> {locale === "fr" ? "Laval, Montréal, Rive-Nord et Québec à distance" : "Laval, Montreal, North Shore and Quebec remotely"}</span>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-background/12 py-5">
+    <div class="container text-xs text-background/60">© {new Date().getFullYear()} {brand.name}. {locale === "fr" ? "Tous droits réservés." : "All rights reserved."}</div>
+  </div>
+</footer>

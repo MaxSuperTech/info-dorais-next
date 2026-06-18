@@ -1,0 +1,29 @@
+---
+import Icon from "@/components/Icon.astro";
+import { faqs, type Locale } from "@/data/site";
+
+const { locale, limit } = Astro.props as { locale: Locale; limit?: number };
+const items = typeof limit === "number" ? faqs[locale].slice(0, limit) : faqs[locale];
+---
+
+<div class="card overflow-hidden">
+  <div class="border-b border-border p-5 sm:p-6">
+    <span class="text-xs font-black uppercase tracking-[0.14em] text-primary">
+      {locale === "fr" ? "Questions fréquentes" : "Frequently asked questions"}
+    </span>
+    <h2 class="mt-2 font-heading text-2xl font-black">
+      {locale === "fr" ? "Réponses rapides avant de demander un diagnostic." : "Quick answers before requesting a diagnostic."}
+    </h2>
+  </div>
+  <div class="divide-y divide-border">
+    {items.map(([question, answer], index) => (
+      <details class="group p-5 open:bg-primary/5 sm:p-6" open={index === 0}>
+        <summary class="flex list-none items-center justify-between gap-4 font-heading font-black">
+          <span>{question}</span>
+          <Icon name="arrow" class="size-5 shrink-0 text-primary transition duration-200 group-open:rotate-90" />
+        </summary>
+        <p class="mt-4 text-sm leading-7 text-muted-foreground">{answer}</p>
+      </details>
+    ))}
+  </div>
+</div>

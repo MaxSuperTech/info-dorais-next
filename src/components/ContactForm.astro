@@ -1,0 +1,57 @@
+---
+import Icon from "@/components/Icon.astro";
+import { brand, ui, type Locale } from "@/data/site";
+
+const { locale } = Astro.props as { locale: Locale };
+const t = ui[locale];
+const turnstileSiteKey = "REMPLACE_PAR_TA_CLE_SITE_TURNSTILE";
+---
+
+<div class="card p-6 shadow-premium sm:p-8" id="diagnostic">
+  <div class="flex items-center gap-3">
+    <Icon name="mail" class="size-7 text-primary" />
+    <h2 class="font-heading text-3xl font-black">{t.contactTitle}</h2>
+  </div>
+  <p class="mt-3 text-sm leading-6 text-muted-foreground">
+    {locale === "fr"
+      ? "Ajoutez le type d’appareil, les symptômes et l’urgence. Vous recevrez la suite la plus logique."
+      : "Add the device type, symptoms and urgency. You will receive the most logical next step."}
+  </p>
+  <form class="mt-6 grid gap-4" action="/contact.php" method="post">
+    <input type="hidden" name="lang" value={locale} />
+    <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+    <div class="field">
+      <label for={`name-${locale}`}>{t.name}</label>
+      <input id={`name-${locale}`} name="name" autocomplete="name" required />
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="field">
+        <label for={`email-${locale}`}>{t.email}</label>
+        <input id={`email-${locale}`} name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for={`phone-${locale}`}>{t.phone}</label>
+        <input id={`phone-${locale}`} name="phone" type="tel" autocomplete="tel" placeholder={brand.phone} />
+      </div>
+    </div>
+    <div class="field">
+      <label for={`message-${locale}`}>{t.details}</label>
+      <textarea
+        id={`message-${locale}`}
+        name="message"
+        required
+        placeholder={locale === "fr" ? "Exemple : PC lent, virus suspect, courriel bloqué, besoin PME..." : "Example: slow PC, suspected virus, blocked email, business need..."}
+      ></textarea>
+    </div>
+    <div class="grid gap-2">
+      <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="auto" data-language={locale === "fr" ? "fr" : "en"}></div>
+      <p class="text-xs text-muted-foreground">
+        {locale === "fr" ? "Protection anti-spam avec Cloudflare Turnstile." : "Spam protection with Cloudflare Turnstile."}
+      </p>
+    </div>
+    <button class="btn btn-primary" type="submit">
+      <Icon name="mail" class="size-5" />
+      {t.submit}
+    </button>
+  </form>
+</div>

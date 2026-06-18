@@ -1,0 +1,320 @@
+---
+import ContactForm from "@/components/ContactForm.astro";
+import FAQBlock from "@/components/FAQBlock.astro";
+import Hero from "@/components/Hero.astro";
+import Icon from "@/components/Icon.astro";
+import SectionIntro from "@/components/SectionIntro.astro";
+import ServiceCard from "@/components/ServiceCard.astro";
+import {
+  allServices,
+  brand,
+  pages,
+  paths,
+  primaryServices,
+  problems,
+  processSteps,
+  reasons,
+  ui,
+  type Locale,
+  type PageKey,
+} from "@/data/site";
+
+const { locale, pageKey } = Astro.props as { locale: Locale; pageKey: PageKey };
+const page = pages[locale][pageKey];
+const t = ui[locale];
+const isHome = pageKey === "home";
+const isContact = pageKey === "contact";
+const isFaq = pageKey === "faq";
+const isPrivacy = pageKey === "privacy";
+type DetailPageKey = Exclude<PageKey, "home" | "faq" | "contact" | "privacy">;
+
+const detailMap = {
+  fr: {
+    repair: [
+      ["Diagnostic avant réparation", "On vérifie les symptômes, la santé du disque, les erreurs Windows et les signes matériels avant de recommander une action."],
+      ["Données et continuité", "Quand c’est possible, la sauvegarde ou le transfert de données passe avant les opérations plus risquées."],
+      ["Solution réaliste", "Réparer, optimiser, remplacer une pièce ou réinstaller Windows: l’option est expliquée clairement."],
+    ],
+    remote: [
+      ["Session encadrée", "Vous gardez le contrôle de la connexion et l’accès est utilisé seulement pour l’intervention."],
+      ["Problèmes courants", "Courriel, logiciels, imprimantes, Windows, comptes et configuration se règlent souvent rapidement à distance."],
+      ["Quand se déplacer", "Si le problème est matériel ou réseau local, on vous le dit au lieu de forcer une session inutile."],
+    ],
+    maintenance: [
+      ["Nettoyage utile", "On retire les irritants, logiciels indésirables et configurations qui nuisent à la stabilité."],
+      ["Optimisation Windows", "Démarrage, mises à jour, espace disque, navigateur et services sont vérifiés avec méthode."],
+      ["Prévention", "Vous repartez avec des conseils simples pour réduire les ralentissements et les risques."],
+    ],
+    business: [
+      ["Postes de travail", "Installation, comptes, courriels, logiciels, imprimantes, accès partagés et soutien aux utilisateurs."],
+      ["Courriels et collaboration", "Aide de base Microsoft 365, Google Workspace, Outlook, mobile et bonnes pratiques."],
+      ["Support flexible", "Intervention ponctuelle ou soutien récurrent léger, adapté à la taille de l’entreprise."],
+    ],
+    emailWeb: [
+      ["Courriel avec domaine", "Configuration d’adresse professionnelle, Outlook/mobile et dépannage de livraison."],
+      ["Microsoft 365 / Google Workspace", "Aide de base pour comptes, utilisateurs, synchronisation et accès."],
+      ["Web simple et VPS", "Hébergement, HTTPS, sauvegardes et petits services web si le besoin est pertinent."],
+    ],
+    services: [
+      ["Particuliers", "Réparation, ordinateur lent, virus, Windows, données, imprimantes et conseils d’achat."],
+      ["Travailleurs autonomes", "Courriel, outils de travail, support à distance et stabilité du poste principal."],
+      ["PME", "Postes, comptes, courriels, réseau, sauvegardes et accompagnement sans jargon."],
+    ],
+    about: [
+      ["Approche humaine", "Le service mise sur des explications simples et une relation de confiance."],
+      ["Formation et passion", "Info Dorais est porté par Maxime Dorais, technicien local passionné d’informatique."],
+      ["Résultat clair", "Chaque intervention vise à régler le problème et à rendre la suite compréhensible."],
+    ],
+  },
+  en: {
+    repair: [
+      ["Diagnostic before repair", "We check symptoms, drive health, Windows errors and hardware signs before recommending an action."],
+      ["Data continuity", "When possible, backup or transfer comes before riskier operations."],
+      ["Realistic solution", "Repair, optimize, replace a part or reinstall Windows: the option is explained clearly."],
+    ],
+    remote: [
+      ["Guided session", "You keep control of the connection and access is used only for the intervention."],
+      ["Common issues", "Email, software, printers, Windows, accounts and configuration can often be solved remotely."],
+      ["When on-site is better", "If the issue is hardware or local network related, we say so instead of forcing a remote session."],
+    ],
+    maintenance: [
+      ["Useful cleanup", "We remove irritants, unwanted software and settings that hurt stability."],
+      ["Windows optimization", "Startup, updates, disk space, browser and services are checked methodically."],
+      ["Prevention", "You leave with simple advice to reduce slowdowns and risks."],
+    ],
+    business: [
+      ["Workstations", "Setup, accounts, email, software, printers, shared access and user support."],
+      ["Email and collaboration", "Basic Microsoft 365, Google Workspace, Outlook, mobile and best-practice help."],
+      ["Flexible support", "One-time intervention or light recurring support adapted to the size of the business."],
+    ],
+    emailWeb: [
+      ["Domain email", "Professional email setup, Outlook/mobile configuration and delivery troubleshooting."],
+      ["Microsoft 365 / Google Workspace", "Basic help for accounts, users, sync and access."],
+      ["Simple web and VPS", "Hosting, HTTPS, backups and small web services when relevant."],
+    ],
+    services: [
+      ["Home users", "Repair, slow computers, viruses, Windows, data, printers and buying advice."],
+      ["Self-employed", "Email, work tools, remote support and stability for the main workstation."],
+      ["Small businesses", "Workstations, accounts, email, network, backups and jargon-free guidance."],
+    ],
+    about: [
+      ["Human approach", "The service focuses on simple explanations and trust."],
+      ["Training and passion", "Info Dorais is led by Maxime Dorais, a local technician passionate about IT."],
+      ["Clear result", "Each intervention aims to solve the issue and make the next steps understandable."],
+    ],
+  },
+} as const;
+
+const detailCards =
+  pageKey === "privacy" || pageKey === "contact" || pageKey === "faq" || pageKey === "home"
+    ? []
+    : detailMap[locale][pageKey as DetailPageKey] ?? detailMap[locale].services;
+---
+
+<Hero locale={locale} page={page} pageKey={pageKey} />
+
+{isPrivacy ? (
+  <section class="section">
+    <div class="container max-w-3xl">
+      <div class="card p-6 sm:p-10">
+        <p class="text-lg leading-8 text-muted-foreground">{page.intro}</p>
+        <div class="mt-8 grid gap-6 text-sm leading-7 text-muted-foreground">
+          <section>
+            <h2 class="font-heading text-2xl font-black text-foreground">{locale === "fr" ? "Informations collectées" : "Information collected"}</h2>
+            <p class="mt-3">{locale === "fr" ? "Le formulaire peut transmettre votre nom, courriel, téléphone et description du besoin. Ces informations servent seulement à répondre à votre demande." : "The form may send your name, email, phone number and request details. This information is used only to respond to your request."}</p>
+          </section>
+          <section>
+            <h2 class="font-heading text-2xl font-black text-foreground">{locale === "fr" ? "Conservation et partage" : "Retention and sharing"}</h2>
+            <p class="mt-3">{locale === "fr" ? "Les informations ne sont pas vendues. Elles peuvent être conservées dans les courriels nécessaires au suivi du service." : "Information is not sold. It may be kept in emails needed for service follow-up."}</p>
+          </section>
+          <section>
+            <h2 class="font-heading text-2xl font-black text-foreground">Cloudflare Turnstile</h2>
+            <p class="mt-3">{locale === "fr" ? "Le formulaire utilise Cloudflare Turnstile pour réduire le spam. Cloudflare peut traiter certains signaux techniques pour vérifier la soumission." : "The form uses Cloudflare Turnstile to reduce spam. Cloudflare may process technical signals to verify the submission."}</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+) : (
+  <>
+    {!isContact && !isFaq && (
+      <section class="section bg-card">
+        <div class="container">
+          <SectionIntro
+            label={isHome ? (locale === "fr" ? "Services principaux" : "Main services") : page.eyebrow}
+            title={isHome ? (locale === "fr" ? "Les problèmes informatiques les plus courants, réglés simplement." : "Common IT issues, solved simply.") : page.intro}
+            text={isHome ? (locale === "fr" ? "Info Dorais couvre autant le dépannage ponctuel que l’entretien, le support à distance et les besoins PME." : "Info Dorais covers one-time troubleshooting, maintenance, remote support and small business needs.") : undefined}
+          />
+          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {primaryServices[locale].map((service) => <ServiceCard service={service} locale={locale} />)}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {!isHome && !isContact && !isFaq && detailCards.length > 0 && (
+      <section class="section">
+        <div class="container grid gap-4 md:grid-cols-3">
+          {detailCards.map(([title, text]) => (
+            <article class="card card-hover p-6">
+              <Icon name="check" class="size-7 text-primary" />
+              <h2 class="mt-5 font-heading text-xl font-black">{title}</h2>
+              <p class="mt-3 text-sm leading-7 text-muted-foreground">{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {(isHome || pageKey === "services") && (
+      <section class="section">
+        <div class="container grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
+          <SectionIntro
+            label={locale === "fr" ? "Ce qu’on règle" : "What we solve"}
+            title={locale === "fr" ? "Des irritants concrets, pas des promesses vagues." : "Concrete problems, not vague promises."}
+            text={locale === "fr" ? "Le site est optimisé pour les recherches locales, mais le contenu reste écrit pour les vrais clients." : "The site is optimized for local search, but the content stays written for real clients."}
+          />
+          <div class="grid gap-3 sm:grid-cols-2">
+            {problems[locale].map((problem) => (
+              <div class="card flex items-start gap-3 p-4">
+                <Icon name="check" class="mt-0.5 size-5 shrink-0 text-primary" />
+                <span class="text-sm font-bold">{problem}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {isHome && (
+      <>
+        <section class="section bg-foreground text-background">
+          <div class="container grid gap-10 lg:grid-cols-[.85fr_1.15fr]">
+            <div>
+              <span class="badge border-background/70 bg-background/10 text-background">{locale === "fr" ? "Pourquoi Info Dorais" : "Why Info Dorais"}</span>
+              <h2 class="mt-5 font-heading text-3xl font-black leading-tight sm:text-5xl">
+                {locale === "fr" ? "Plus accessible qu’une grosse firme TI, plus structuré qu’un dépannage improvisé." : "More accessible than a large IT firm, more structured than improvised troubleshooting."}
+              </h2>
+              <p class="mt-5 max-w-xl text-background/72">
+                {locale === "fr" ? "Vous obtenez un service direct, clair et professionnel pour les besoins informatiques de tous les jours." : "You get direct, clear and professional service for everyday IT needs."}
+              </p>
+            </div>
+            <div class="grid border border-background/15 sm:grid-cols-2">
+              {reasons[locale].map(([title, text]) => (
+                <div class="border-b border-background/15 p-5 sm:border-r even:sm:border-r-0">
+                  <Icon name="sparkles" class="size-6 text-background" />
+                  <h3 class="mt-4 font-heading font-black">{title}</h3>
+                  <p class="mt-2 text-sm leading-6 text-background/70">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <SectionIntro
+              centered
+              label={locale === "fr" ? "Processus" : "Process"}
+              title={locale === "fr" ? "Une méthode simple en trois étapes." : "A simple three-step method."}
+              text={locale === "fr" ? "Pas besoin de tout connaître en informatique. Vous décrivez le symptôme, on s’occupe de clarifier la suite." : "You do not need to know everything about IT. Describe the symptom and we clarify the next step."}
+            />
+            <div class="grid border border-border bg-card md:grid-cols-3">
+              {processSteps[locale].map(([title, text], index) => (
+                <div class="border-b border-border p-6 md:border-b-0 md:border-r last:md:border-r-0">
+                  <div class="flex size-10 items-center justify-center bg-primary text-sm font-black text-primary-foreground">{index + 1}</div>
+                  <h3 class="mt-5 font-heading text-xl font-black">{title}</h3>
+                  <p class="mt-3 text-sm leading-7 text-muted-foreground">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="section bg-card">
+          <div class="container grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
+            <div>
+              <span class="badge">{locale === "fr" ? "Zone desservie" : "Service area"}</span>
+              <h2 class="mt-4 font-heading text-3xl font-black leading-tight sm:text-5xl">
+                {locale === "fr" ? "Laval, les environs et le support à distance partout au Québec." : "Laval, nearby areas and remote support across Quebec."}
+              </h2>
+              <p class="mt-4 text-lg leading-8 text-muted-foreground">
+                {locale === "fr" ? "Info Dorais dessert Laval, Montréal, la Rive-Nord et plusieurs villes voisines, avec support à distance lorsque possible." : "Info Dorais serves Laval, Montreal, the North Shore and nearby cities, with remote support when possible."}
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              {brand.areaServed.map((area) => <span class="border border-primary/25 bg-primary/10 px-3 py-2 text-sm font-bold text-primary">{area}</span>)}
+            </div>
+          </div>
+        </section>
+      </>
+    )}
+
+    {(isHome || isFaq) && (
+      <section class="section">
+        <div class="container">
+          <FAQBlock locale={locale} />
+        </div>
+      </section>
+    )}
+
+    {(isHome || pageKey === "services") && (
+      <section class="section bg-card">
+        <div class="container">
+          <SectionIntro
+            label={locale === "fr" ? "Liste complète" : "Complete list"}
+            title={locale === "fr" ? "Services offerts par Info Dorais." : "Services offered by Info Dorais."}
+            text={locale === "fr" ? "Cette liste aide aussi à orienter une demande de diagnostic." : "This list also helps guide a diagnostic request."}
+          />
+          <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {allServices[locale].map((service) => (
+              <div class="card flex gap-3 p-4 text-sm font-bold">
+                <Icon name="check" class="mt-0.5 size-4 shrink-0 text-primary" />
+                {service}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class:list={["section", isContact ? "" : "pt-0"]}>
+      <div class="container grid gap-8 lg:grid-cols-[1.05fr_.95fr]">
+        <ContactForm locale={locale} />
+        <aside class="grid gap-4 self-start">
+          <div class="card p-6">
+            <span class="badge">Info Dorais</span>
+            <h2 class="mt-4 font-heading text-3xl font-black">{locale === "fr" ? "Contact rapide" : "Fast contact"}</h2>
+            <div class="mt-5 grid gap-3 text-sm">
+              <a class="card flex items-center gap-3 p-4 hover:border-primary/45" href={brand.phoneHref}><Icon name="phone" class="size-5 text-primary" /> {brand.phone}</a>
+              <a class="card flex items-center gap-3 p-4 hover:border-primary/45" href={brand.emailHref}><Icon name="mail" class="size-5 text-primary" /> {brand.email}</a>
+              <a class="btn btn-secondary" href={paths.remote[locale]}><Icon name="monitor" class="size-5" /> {t.remote}</a>
+            </div>
+          </div>
+          {!isFaq && <FAQBlock locale={locale} limit={3} />}
+        </aside>
+      </div>
+    </section>
+
+    <section class="section pt-0">
+      <div class="container">
+        <div class="border border-primary/30 bg-primary/10 p-6 shadow-line sm:p-10">
+          <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <h2 class="font-heading text-3xl font-black leading-tight sm:text-5xl">
+                {locale === "fr" ? "Besoin d’un technicien informatique à Laval?" : "Need an IT technician in Laval?"}
+              </h2>
+              <p class="mt-4 max-w-2xl text-muted-foreground">
+                {locale === "fr" ? "Appelez maintenant ou envoyez une demande de diagnostic. Le but: comprendre vite et vous redonner le contrôle." : "Call now or send a diagnostic request. The goal: understand quickly and get you back in control."}
+              </p>
+            </div>
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <a class="btn btn-primary" href={brand.phoneHref}>{brand.phone}</a>
+              <a class="btn btn-secondary" href={`${paths.contact[locale]}#diagnostic`}>{t.diagnostic}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </>
+)}

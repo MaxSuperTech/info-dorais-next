@@ -1,0 +1,14 @@
+---
+const { label, title, text, centered = false } = Astro.props as {
+  label: string;
+  title: string;
+  text?: string;
+  centered?: boolean;
+};
+---
+
+<div class:list={[centered ? "mx-auto mb-10 max-w-2xl text-center" : "mb-10 max-w-3xl", "reveal"]}>
+  <span class="badge">{label}</span>
+  <h2 class="mt-4 font-heading text-3xl font-black leading-tight sm:text-5xl">{title}</h2>
+  {text && <p class="mt-4 text-lg leading-8 text-muted-foreground">{text}</p>}
+</div>
