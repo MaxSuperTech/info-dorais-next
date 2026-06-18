@@ -1,0 +1,70 @@
+---
+import type { Locale } from "@/data/site";
+
+const { locale } = Astro.props as { locale: Locale };
+
+const outcomes = {
+  fr: [
+    {
+      title: "Gain de temps",
+      text: "Un diagnostic clair pour éviter les essais inutiles.",
+      image: "/images/remote-refresh.webp",
+    },
+    {
+      title: "Performance",
+      text: "Des postes plus stables, plus rapides et mieux entretenus.",
+      image: "/images/repair-refresh.webp",
+    },
+    {
+      title: "Moins de stress",
+      text: "Un langage simple, des actions concrètes et un suivi humain.",
+      image: "/images/pme-refresh.webp",
+    },
+  ],
+  en: [
+    {
+      title: "Time saved",
+      text: "A clear diagnostic to avoid unnecessary trial and error.",
+      image: "/images/remote-refresh.webp",
+    },
+    {
+      title: "Performance",
+      text: "More stable, faster and better maintained workstations.",
+      image: "/images/repair-refresh.webp",
+    },
+    {
+      title: "Less stress",
+      text: "Simple language, concrete actions and human follow-up.",
+      image: "/images/pme-refresh.webp",
+    },
+  ],
+} as const;
+---
+
+<section class="border-b border-border bg-foreground text-background">
+  <div class="container py-4">
+    <div class="grid gap-3 md:grid-cols-3">
+      {outcomes[locale].map((item, index) => (
+        <article class="group relative min-h-52 overflow-hidden border border-background/15 bg-background/5">
+          <img
+            src={item.image}
+            alt=""
+            aria-hidden="true"
+            width="720"
+            height="480"
+            loading="lazy"
+            class="absolute inset-0 h-full w-full object-cover opacity-38 saturate-75 transition duration-300 group-hover:opacity-48"
+          />
+          <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,31,.40),rgba(7,17,31,.90))]"></div>
+          <div class="relative flex h-full min-h-52 flex-col justify-end p-5">
+            <span class="text-xs font-black uppercase tracking-[0.14em] text-background/70">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h2 class="mt-3 font-heading text-3xl font-black leading-none">{item.title}</h2>
+            <p class="mt-3 max-w-sm text-sm leading-6 text-background/72">{item.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

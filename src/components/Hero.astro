@@ -1,10 +1,42 @@
 ---
 import Icon from "@/components/Icon.astro";
-import { brand, paths, processSteps, ui, type Locale, type Page, type PageKey } from "@/data/site";
+import { brand, paths, processSteps, ui, type IconName, type Locale, type Page, type PageKey } from "@/data/site";
 
 const { locale, page, pageKey } = Astro.props as { locale: Locale; page: Page; pageKey: PageKey };
 const t = ui[locale];
 const steps = processSteps[locale];
+const summaryTitle =
+  pageKey === "home"
+    ? locale === "fr"
+      ? "Votre informatique, prise en main."
+      : "Your IT, taken in hand."
+    : locale === "fr"
+      ? "Comprendre vite. Régler proprement."
+      : "Understand quickly. Fix cleanly.";
+const summaryItems: [IconName, string][] =
+  pageKey === "home"
+    ? locale === "fr"
+      ? [
+          ["clock", "Gain de temps"],
+          ["sparkles", "Performance"],
+          ["shield", "Moins de stress"],
+        ]
+      : [
+          ["clock", "Time saved"],
+          ["sparkles", "Performance"],
+          ["shield", "Less stress"],
+        ]
+    : locale === "fr"
+      ? [
+          ["phone", "Appel direct"],
+          ["monitor", "Support à distance"],
+          ["shield", "Session encadrée"],
+        ]
+      : [
+          ["phone", "Direct call"],
+          ["monitor", "Remote support"],
+          ["shield", "Guided session"],
+        ];
 ---
 
 <section class="relative isolate overflow-hidden border-b border-border bg-background">
@@ -48,21 +80,15 @@ const steps = processSteps[locale];
     <aside class="hidden border border-border bg-card/90 p-5 shadow-premium backdrop-blur-xl reveal lg:block" aria-label={locale === "fr" ? "Résumé du service" : "Service summary"}>
       <span class="badge">{locale === "fr" ? "Réponse rapide" : "Fast response"}</span>
       <strong class="mt-4 block font-heading text-3xl font-black leading-tight">
-        {locale === "fr" ? "Comprendre vite. Régler proprement." : "Understand quickly. Fix cleanly."}
+        {summaryTitle}
       </strong>
       <div class="mt-6 grid gap-3 text-sm font-bold">
-        <div class="flex items-center gap-3 border border-border bg-background/75 p-3">
-          <Icon name="phone" class="size-5 text-primary" />
-          <span>{locale === "fr" ? "Appel direct" : "Direct call"}</span>
-        </div>
-        <div class="flex items-center gap-3 border border-border bg-background/75 p-3">
-          <Icon name="monitor" class="size-5 text-primary" />
-          <span>{locale === "fr" ? "Support à distance" : "Remote support"}</span>
-        </div>
-        <div class="flex items-center gap-3 border border-border bg-background/75 p-3">
-          <Icon name="shield" class="size-5 text-primary" />
-          <span>{locale === "fr" ? "Session encadrée" : "Guided session"}</span>
-        </div>
+        {summaryItems.map(([icon, label]) => (
+          <div class="flex items-center gap-3 border border-border bg-background/75 p-3">
+            <Icon name={icon} class="size-5 text-primary" />
+            <span>{label}</span>
+          </div>
+        ))}
       </div>
     </aside>
   </div>

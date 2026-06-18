@@ -148,10 +148,10 @@ export const pages = {
       title: "Support informatique et réparation ordinateur Laval | Info Dorais",
       description:
         "Info Dorais offre réparation ordinateur, support informatique, entretien, virus, Windows, courriel professionnel et soutien PME à Laval et environs.",
-      eyebrow: "Service informatique Laval et environs",
-      h1: "Un service informatique simple, humain et efficace pour régler vos problèmes rapidement.",
+      eyebrow: "Service TI local à Laval",
+      h1: "On parle informatique. On vous l’explique simplement.",
       lead:
-        "Réparation d’ordinateur, ordinateur lent, virus, installation Windows, courriel professionnel ou soutien PME: Info Dorais vous aide avec des explications claires et des solutions concrètes.",
+        "Réparation d’ordinateur, support à distance, courriel professionnel, entretien et soutien PME: Info Dorais prend le problème en main pour réduire le stress et garder vos outils fiables.",
       image: "/images/hero-refresh.webp",
       intro: "Dès le premier contact, on cherche la meilleure intervention: appel, diagnostic, support à distance ou déplacement si nécessaire.",
     },
@@ -271,10 +271,10 @@ export const pages = {
       title: "IT support and computer repair Laval | Info Dorais",
       description:
         "Info Dorais provides computer repair, IT support, maintenance, virus cleanup, Windows installation, business email and small business support in Laval.",
-      eyebrow: "IT service in Laval and nearby areas",
-      h1: "Simple, human and efficient IT support to solve your issues quickly.",
+      eyebrow: "Local IT service in Laval",
+      h1: "We speak IT. We explain it simply.",
       lead:
-        "Computer repair, slow PC, viruses, Windows installation, business email or small business support: Info Dorais helps with clear explanations and practical solutions.",
+        "Computer repair, remote support, business email, maintenance and small business IT help: Info Dorais takes the issue in hand to reduce stress and keep your tools reliable.",
       image: "/images/hero-refresh.webp",
       intro: "From the first contact, we choose the best path: call, diagnostic, remote support or on-site help when needed.",
     },
