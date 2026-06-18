@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import {
@@ -47,6 +48,7 @@ const turnstileSiteKey = "REMPLACE_PAR_TA_CLE_SITE_TURNSTILE";
 export function SitePage({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
   const t = common[locale];
   const page = pages[locale][pageKey];
+  const isHome = pageKey === "home";
   const isContact = pageKey === "contact";
 
   return (
@@ -87,8 +89,15 @@ export function SitePage({ locale, pageKey }: { locale: Locale; pageKey: PageKey
 
           <aside className="border border-border bg-card shadow-premium" aria-label={locale === "fr" ? "Résumé du diagnostic" : "Diagnostic summary"}>
             <div className="relative aspect-[4/3] overflow-hidden border-b border-border bg-foreground">
-              <VectorShowcase locale={locale} pageKey={pageKey} />
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-foreground to-transparent" />
+              <Image
+                src={page.image}
+                alt=""
+                fill
+                priority={isHome}
+                sizes="(min-width: 1024px) 430px, 100vw"
+                className="object-cover opacity-80"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 z-30 border-t border-background/10 bg-foreground/95 p-5 text-background">
                 <span className="text-xs font-bold uppercase tracking-[0.14em] text-background/75">
                   {locale === "fr" ? "Diagnostic express" : "Express diagnostic"}
@@ -163,9 +172,17 @@ function PageBody({ locale, pageKey }: { locale: Locale; pageKey: PageKey }) {
             }
           />
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {services[locale].map((service, index) => (
+            {services[locale].map((service) => (
               <Card key={service.title} className="group overflow-hidden shadow-none transition duration-200 hover:-translate-y-1 hover:border-primary/45 hover:shadow-premium">
-                <ServiceVectorTile Icon={service.icon} index={index} />
+                <div className="relative h-44 border-b border-border bg-foreground">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover opacity-90 transition-opacity group-hover:opacity-100"
+                  />
+                </div>
                 <CardContent>
                   <service.icon className="mb-4 size-7 text-primary" aria-hidden="true" />
                   <h3 className="font-heading text-xl font-black">{service.title}</h3>
