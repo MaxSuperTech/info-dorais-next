@@ -96,7 +96,12 @@ const carouselSlides =
     </div>
 
     {isHome && (
-      <aside class="home-carousel order-1 reveal lg:order-2" aria-label={locale === "fr" ? "Points forts Info Dorais" : "Info Dorais highlights"} data-home-carousel>
+      <aside
+        class="home-carousel order-1 reveal lg:order-2"
+        aria-label={locale === "fr" ? "Points forts Info Dorais" : "Info Dorais highlights"}
+        data-home-carousel
+        data-carousel-interval="4200"
+      >
         {carouselSlides.map((slide, index) => (
           <article
             class:list={["home-slide", index === 0 && "is-active"]}
@@ -120,12 +125,13 @@ const carouselSlides =
             </div>
           </article>
         ))}
-        <div class="absolute inset-x-5 bottom-5 z-10 flex justify-center gap-2.5 sm:inset-x-7 sm:bottom-7">
+        <div class="home-dot-group" aria-label={locale === "fr" ? "Navigation du diaporama" : "Slideshow navigation"}>
           {carouselSlides.map((slide, index) => (
             <button
               type="button"
               class:list={["home-dot", index === 0 && "is-active"]}
               aria-label={`${locale === "fr" ? "Afficher" : "Show"} ${slide.title}`}
+              aria-current={index === 0 ? "true" : undefined}
               data-home-dot={index}
             ></button>
           ))}
@@ -137,29 +143,63 @@ const carouselSlides =
 
 <script is:inline>
   (() => {
-    const carousel = document.querySelector("[data-home-carousel]");
-    if (!carousel) return;
+    const initCarousel = () => {
+      const carousel = document.querySelector("[data-home-carousel]");
+      if (!carousel || carousel.dataset.carouselReady === "true") return;
 
-    const slides = Array.from(carousel.querySelectorAll("[data-home-slide]"));
-    const dots = Array.from(carousel.querySelectorAll("[data-home-dot]"));
-    let active = 0;
+      const slides = Array.from(carousel.querySelectorAll("[data-home-slide]"));
+      const dots = Array.from(carousel.querySelectorAll("[data-home-dot]"));
+      if (slides.length === 0) return;
 
-    const showSlide = (nextIndex) => {
-      active = (nextIndex + slides.length) % slides.length;
-      slides.forEach((slide, index) => {
-        const isActive = index === active;
-        slide.classList.toggle("is-active", isActive);
-        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+      carousel.dataset.carouselReady = "true";
+      let active = slides.findIndex((slide) => slide.classList.contains("is-active"));
+      if (active < 0) active = 0;
+
+      const showSlide = (nextIndex) => {
+        active = (nextIndex + slides.length) % slides.length;
+        slides.forEach((slide, index) => {
+          const isActive = index === active;
+          slide.classList.toggle("is-active", isActive);
+          slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+        });
+        dots.forEach((dot, index) => {
+          const isActive = index === active;
+          dot.classList.toggle("is-active", isActive);
+          if (isActive) {
+            dot.setAttribute("aria-current", "true");
+          } else {
+            dot.removeAttribute("aria-current");
+          }
+        });
+      };
+
+      let timer;
+      const startTimer = () => {
+        if (slides.length <= 1) return;
+        window.clearInterval(timer);
+        timer = window.setInterval(() => showSlide(active + 1), Number(carousel.dataset.carouselInterval || 4200));
+      };
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          showSlide(index);
+          startTimer();
+        });
       });
-      dots.forEach((dot, index) => dot.classList.toggle("is-active", index === active));
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          window.clearInterval(timer);
+        } else {
+          startTimer();
+        }
+      });
+
+      showSlide(active);
+      startTimer();
     };
 
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => showSlide(index));
-    });
-
-    if (slides.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      window.setInterval(() => showSlide(active + 1), 4600);
-    }
+    initCarousel();
+    document.addEventListener("astro:page-load", initCarousel);
   })();
 </script>

@@ -141,6 +141,20 @@ img {
     linear-gradient(115deg, rgba(20, 85, 155, .68), transparent 54%);
 }
 
+.home-dot-group {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 10;
+  display: flex;
+  gap: .625rem;
+  align-items: center;
+  padding: .45rem;
+  border: 1px solid rgba(255, 255, 255, .18);
+  background: rgba(7, 17, 31, .46);
+  backdrop-filter: blur(10px);
+}
+
 .home-dot {
   width: .68rem;
   height: .68rem;
@@ -149,6 +163,7 @@ img {
   border-radius: 999px;
   background: rgba(255, 255, 255, .36);
   padding: 0;
+  cursor: pointer;
   transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
@@ -168,6 +183,11 @@ img {
 @media (min-width: 640px) {
   .home-carousel {
     min-height: 430px;
+  }
+
+  .home-dot-group {
+    top: 1.75rem;
+    right: 1.75rem;
   }
 }
 
