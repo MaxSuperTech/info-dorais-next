@@ -27,6 +27,9 @@ const isHome = pageKey === "home";
 const isContact = pageKey === "contact";
 const isFaq = pageKey === "faq";
 const isPrivacy = pageKey === "privacy";
+const showPrimaryServices = isHome || pageKey === "services";
+const showContactSection = isHome || isContact;
+const showFinalCta = !isHome && !isContact;
 type DetailPageKey = Exclude<PageKey, "home" | "faq" | "contact" | "privacy">;
 
 const detailMap = {
@@ -107,7 +110,7 @@ const detailMap = {
 } as const;
 
 const detailCards =
-  pageKey === "privacy" || pageKey === "contact" || pageKey === "faq" || pageKey === "home"
+  pageKey === "privacy" || pageKey === "contact" || pageKey === "faq" || pageKey === "home" || pageKey === "services"
     ? []
     : detailMap[locale][pageKey as DetailPageKey] ?? detailMap[locale].services;
 ---
@@ -139,7 +142,7 @@ const detailCards =
   </section>
 ) : (
   <>
-    {!isContact && !isFaq && (
+    {showPrimaryServices && (
       <section class="section bg-card">
         <div class="container">
           <SectionIntro
@@ -260,7 +263,7 @@ const detailCards =
       </section>
     )}
 
-    {(isHome || pageKey === "services") && (
+    {pageKey === "services" && (
       <section class="section bg-card">
         <div class="container">
           <SectionIntro
@@ -280,43 +283,47 @@ const detailCards =
       </section>
     )}
 
-    <section class:list={["section", isContact ? "" : "pt-0"]}>
-      <div class="container grid gap-8 lg:grid-cols-[1.05fr_.95fr]">
-        <ContactForm locale={locale} />
-        <aside class="grid gap-4 self-start">
-          <div class="card p-6">
-            <span class="badge">Info Dorais</span>
-            <h2 class="mt-4 font-heading text-3xl font-black">{locale === "fr" ? "Contact rapide" : "Fast contact"}</h2>
-            <div class="mt-5 grid gap-3 text-sm">
-              <a class="card flex items-center gap-3 p-4 hover:border-primary/45" href={brand.phoneHref}><Icon name="phone" class="size-5 text-primary" /> {brand.phone}</a>
-              <a class="card flex items-center gap-3 p-4 hover:border-primary/45" href={brand.emailHref}><Icon name="mail" class="size-5 text-primary" /> {brand.email}</a>
-              <a class="btn btn-secondary" href={paths.remote[locale]}><Icon name="monitor" class="size-5" /> {t.remote}</a>
+    {showContactSection && (
+      <section class:list={["section", isContact ? "" : "pt-0"]}>
+        <div class="container grid gap-8 lg:grid-cols-[1.05fr_.95fr]">
+          <ContactForm locale={locale} />
+          <aside class="grid gap-4 self-start">
+            <div class="card p-6">
+              <span class="badge">Info Dorais</span>
+              <h2 class="mt-4 font-heading text-3xl font-black">{locale === "fr" ? "Contact rapide" : "Fast contact"}</h2>
+              <div class="mt-5 grid gap-3 text-sm">
+                <a class="card flex items-center gap-3 p-4 hover:border-primary/45" href={brand.phoneHref}><Icon name="phone" class="size-5 text-primary" /> {brand.phone}</a>
+                <a class="card flex items-center gap-3 p-4 hover:border-primary/45" href={brand.emailHref}><Icon name="mail" class="size-5 text-primary" /> {brand.email}</a>
+                <a class="btn btn-secondary" href={paths.remote[locale]}><Icon name="monitor" class="size-5" /> {t.remote}</a>
+              </div>
             </div>
-          </div>
-          {!isFaq && <FAQBlock locale={locale} limit={3} />}
-        </aside>
-      </div>
-    </section>
+            {isHome && <FAQBlock locale={locale} limit={3} />}
+          </aside>
+        </div>
+      </section>
+    )}
 
-    <section class="section pt-0">
-      <div class="container">
-        <div class="border border-primary/30 bg-primary/10 p-6 shadow-line sm:p-10">
-          <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div>
-              <h2 class="font-heading text-3xl font-black leading-tight sm:text-5xl">
-                {locale === "fr" ? "Besoin d’un technicien informatique à Laval?" : "Need an IT technician in Laval?"}
-              </h2>
-              <p class="mt-4 max-w-2xl text-muted-foreground">
-                {locale === "fr" ? "Appelez maintenant ou envoyez une demande de diagnostic. Le but: comprendre vite et vous redonner le contrôle." : "Call now or send a diagnostic request. The goal: understand quickly and get you back in control."}
-              </p>
-            </div>
-            <div class="flex flex-col gap-3 sm:flex-row">
-              <a class="btn btn-primary" href={brand.phoneHref}>{brand.phone}</a>
-              <a class="btn btn-secondary" href={`${paths.contact[locale]}#diagnostic`}>{t.diagnostic}</a>
+    {showFinalCta && (
+      <section class="section pt-0">
+        <div class="container">
+          <div class="border border-primary/30 bg-primary/10 p-6 shadow-line sm:p-10">
+            <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div>
+                <h2 class="font-heading text-3xl font-black leading-tight sm:text-5xl">
+                  {locale === "fr" ? "Besoin d’un technicien informatique à Laval?" : "Need an IT technician in Laval?"}
+                </h2>
+                <p class="mt-4 max-w-2xl text-muted-foreground">
+                  {locale === "fr" ? "Appelez maintenant ou envoyez une demande de diagnostic. Le but: comprendre vite et vous redonner le contrôle." : "Call now or send a diagnostic request. The goal: understand quickly and get you back in control."}
+                </p>
+              </div>
+              <div class="flex flex-col gap-3 sm:flex-row">
+                <a class="btn btn-primary" href={brand.phoneHref}>{brand.phone}</a>
+                <a class="btn btn-secondary" href={`${paths.contact[locale]}#diagnostic`}>{t.diagnostic}</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )}
   </>
 )}

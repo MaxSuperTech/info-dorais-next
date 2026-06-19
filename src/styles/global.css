@@ -145,7 +145,7 @@ img {
   height: 3px;
   flex: 1;
   border: 0;
-  background: hsl(var(--background) / .34);
+  background: rgba(255, 255, 255, .36);
   padding: 0;
   transition: background-color 180ms ease, transform 180ms ease;
 }
@@ -153,11 +153,11 @@ img {
 .home-dot:hover,
 .home-dot:focus-visible,
 .home-dot.is-active {
-  background: hsl(var(--primary));
+  background: #ffffff;
 }
 
 .home-dot:focus-visible {
-  outline: 2px solid hsl(var(--background));
+  outline: 2px solid #ffffff;
   outline-offset: 4px;
 }
 

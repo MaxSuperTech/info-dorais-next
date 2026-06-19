@@ -11,18 +11,18 @@ const { service, locale } = Astro.props as { service: ServiceCard; locale: Local
       <img src={service.image} alt="" aria-hidden="true" loading="lazy" width="900" height="700" class="absolute inset-0 h-full w-full object-cover opacity-78 saturate-[.9] transition duration-300 group-hover:scale-[1.04] group-hover:opacity-95" />
       <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,31,.18),rgba(7,17,31,.88))]"></div>
       <div class="visual-grid visual-scan absolute inset-0 opacity-45"></div>
-      <div class="relative flex min-h-72 flex-col justify-between p-5 text-background">
+      <div class="relative flex min-h-72 flex-col justify-between p-5 text-white">
         <div class="flex items-center justify-between gap-3">
-          <span class="border border-background/20 bg-background px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-primary">
+          <span class="border border-white/20 bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-primary">
             {service.tags[0]}
           </span>
-          <span class="flex size-12 items-center justify-center border border-background/20 bg-foreground/80 backdrop-blur">
+          <span class="flex size-12 items-center justify-center border border-white/20 bg-black/55 text-white backdrop-blur">
             <Icon name={service.icon} class="size-6" />
           </span>
         </div>
         <div>
           <h3 class="font-heading text-3xl font-black leading-none sm:text-4xl">{service.title}</h3>
-          <div class="mt-5 inline-flex items-center gap-2 border border-background/25 bg-background/10 px-3 py-2 text-sm font-black backdrop-blur">
+          <div class="mt-5 inline-flex items-center gap-2 border border-white/25 bg-white/10 px-3 py-2 text-sm font-black text-white backdrop-blur">
             {locale === "en" ? "Learn more" : "En savoir plus"}
             <Icon name="arrow" class="size-4 transition group-hover:translate-x-1" />
           </div>
