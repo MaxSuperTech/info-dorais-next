@@ -222,6 +222,38 @@ img {
   outline-offset: 4px;
 }
 
+.area-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.15rem;
+  align-content: flex-start;
+  align-self: flex-start;
+  margin: .15rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.area-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: hsl(var(--foreground));
+  font-size: .95rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.area-marker {
+  width: .42rem;
+  height: .42rem;
+  flex: 0 0 auto;
+  background: hsl(var(--primary));
+}
+
+.dark .area-item {
+  color: hsl(var(--foreground) / .9);
+}
+
 @media (min-width: 640px) {
   .home-carousel {
     min-height: 430px;

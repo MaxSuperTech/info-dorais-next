@@ -319,9 +319,14 @@ const servicesSections = serviceSeoSections[locale];
                 {locale === "fr" ? "Info Dorais dessert Laval, Montréal, la Rive-Nord et plusieurs villes voisines, avec support à distance lorsque possible." : "Info Dorais serves Laval, Montreal, the North Shore and nearby cities, with remote support when possible."}
               </p>
             </div>
-            <div class="flex flex-wrap gap-2">
-              {brand.areaServed.map((area) => <span class="border border-primary/25 bg-primary/10 px-3 py-2 text-sm font-bold text-primary">{area}</span>)}
-            </div>
+            <ul class="area-list" aria-label={locale === "fr" ? "Villes desservies" : "Served cities"}>
+              {brand.areaServed.map((area) => (
+                <li class="area-item">
+                  <span class="area-marker" aria-hidden="true"></span>
+                  <span>{area}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       </>
