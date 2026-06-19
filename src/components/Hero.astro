@@ -120,7 +120,7 @@ const carouselSlides =
             </div>
           </article>
         ))}
-        <div class="absolute inset-x-5 bottom-5 z-10 flex gap-2 sm:inset-x-7 sm:bottom-7">
+        <div class="absolute inset-x-5 bottom-5 z-10 flex justify-center gap-2.5 sm:inset-x-7 sm:bottom-7">
           {carouselSlides.map((slide, index) => (
             <button
               type="button"
@@ -158,8 +158,8 @@ const carouselSlides =
       dot.addEventListener("click", () => showSlide(index));
     });
 
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      window.setInterval(() => showSlide(active + 1), 5600);
+    if (slides.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window.setInterval(() => showSlide(active + 1), 4600);
     }
   })();
 </script>

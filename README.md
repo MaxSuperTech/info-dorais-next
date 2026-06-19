@@ -17,26 +17,30 @@ Forces conservées comme référence :
 Faiblesses corrigées :
 
 - Premier écran pas assez orienté appel/diagnostic.
-- Architecture trop mince pour les intentions Google locales.
-- Pages manquantes pour réparation ordinateur, entretien, PME, courriel et FAQ.
+- Architecture initialement trop éparpillée pour le volume de contenu réel.
+- Intentions SEO locales à regrouper dans des sections fortes plutôt que dans plusieurs pages minces.
 - Design trop générique et moins professionnel.
 - Ancienne structure PHP difficile à faire évoluer proprement.
 - CTA dispersés au lieu d'un parcours clair.
 
-## Nouvelle architecture
+## Nouvelle architecture compacte
 
 - `/` : accueil orientée conversion locale.
-- `/services` : liste complète des services.
-- `/reparation-ordinateur` : SEO réparation ordinateur Laval / réparation PC Laval.
-- `/support-distance` : support informatique à distance.
-- `/entretien-optimisation` : entretien, optimisation, prévention.
-- `/pme` : services pour PME et travailleurs autonomes.
-- `/courriel-solutions-web` : courriel professionnel, Microsoft 365, Google Workspace, web/VPS simple.
+- `/services` : tous les services, avec sections SEO locales et espace client.
 - `/apropos` : crédibilité et approche.
-- `/faq` : contenu SEO et objections fréquentes.
 - `/contact` : appel, courriel, formulaire de diagnostic.
 - `/politique-confidentialite` : confidentialité.
 - `/en/...` : versions anglaises équivalentes.
+
+La navigation publique est volontairement courte : Services, À propos, Contact et Espace client. Le logo ramène à l’accueil.
+
+Les anciennes intentions SEO ne sont pas perdues; elles sont regroupées dans `/services` avec des ancres dédiées :
+
+- `#reparation-ordinateur-laval`
+- `#support-informatique-laval`
+- `#ordinateur-lent-laval`
+- `#support-informatique-pme-laval`
+- `#espace-client`
 
 ## SEO inclus
 
@@ -45,6 +49,7 @@ Faiblesses corrigées :
 - Sitemap généré automatiquement.
 - `robots.txt`.
 - JSON-LD `LocalBusiness`.
+- JSON-LD `ItemList` sur la page Services.
 - JSON-LD `FAQPage` sur les pages pertinentes.
 - Ciblage local: Laval, Montréal, Rive-Nord, Terrebonne, Blainville, Boisbriand, Sainte-Thérèse, Rosemère, Mascouche, Repentigny, Saint-Eustache et environs.
 
@@ -87,7 +92,7 @@ npm audit
 État actuel validé :
 
 - `npm run check` : 0 erreur, 0 warning, 0 hint.
-- `npm run build` : 22 pages statiques générées.
+- `npm run build` : 10 pages statiques générées.
 - `npm audit` : 0 vulnérabilité.
 
 ## Déploiement HestiaCP / Apache
@@ -115,6 +120,8 @@ scp -r dist/* USER@IP_DU_SERVEUR:/home/USER/web/infodorais.com/public_html/
 Important: copier le contenu de `dist/`, pas le dossier `dist` lui-même.
 
 Le fichier `public/contact.php` est copié automatiquement dans `dist/contact.php`, donc le formulaire fonctionne sur un hébergement Apache/PHP HestiaCP.
+
+Le fichier `public/.htaccess` est aussi copié dans `dist/` et redirige les anciennes pages minces vers les nouvelles sections SEO de `/services`.
 
 ## Apache
 

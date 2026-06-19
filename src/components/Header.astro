@@ -28,12 +28,12 @@ const lang = otherLocale(locale);
       <nav class="grid gap-1 min-[1380px]:flex min-[1380px]:items-center min-[1380px]:gap-1" aria-label={locale === "fr" ? "Navigation principale" : "Main navigation"}>
         {nav[locale].map((item) => (
           <a
-            href={paths[item.key][locale]}
+            href={item.href ?? paths[item.key][locale]}
             class:list={[
               "link-underline flex min-h-11 items-center whitespace-nowrap border-l-2 border-transparent px-3 py-2 text-sm font-black text-muted-foreground transition hover:text-foreground min-[1380px]:min-h-0 min-[1380px]:border-l-0 min-[1380px]:px-2.5 min-[1380px]:py-6",
-              item.key === pageKey && "border-primary bg-accent text-primary min-[1380px]:bg-transparent",
+              item.key === pageKey && !item.href && "border-primary bg-accent text-primary min-[1380px]:bg-transparent",
             ]}
-            aria-current={item.key === pageKey ? "page" : undefined}
+            aria-current={item.key === pageKey && !item.href ? "page" : undefined}
           >
             {item.label}
           </a>

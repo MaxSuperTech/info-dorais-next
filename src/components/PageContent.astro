@@ -16,6 +16,7 @@ import {
   processSteps,
   reasons,
   ui,
+  type IconName,
   type Locale,
   type PageKey,
 } from "@/data/site";
@@ -31,6 +32,76 @@ const showPrimaryServices = isHome || pageKey === "services";
 const showContactSection = isHome || isContact;
 const showFinalCta = !isHome && !isContact;
 type DetailPageKey = Exclude<PageKey, "home" | "faq" | "contact" | "privacy">;
+type ServiceSeoSection = {
+  id: string;
+  icon: IconName;
+  title: string;
+  text: string;
+  items: string[];
+};
+
+const serviceSeoSections = {
+  fr: [
+    {
+      id: "reparation-ordinateur-laval",
+      icon: "laptop",
+      title: "Réparation ordinateur Laval et réparation PC",
+      text: "Diagnostic de PC ou portable lent, bloqué, infecté, instable ou qui ne démarre plus. Info Dorais vérifie les symptômes, protège vos données quand c’est possible et propose une solution réaliste.",
+      items: ["Réparation PC Laval", "Installation Windows", "Suppression de virus", "Transfert de données"],
+    },
+    {
+      id: "support-informatique-laval",
+      icon: "tool",
+      title: "Support informatique Laval pour particuliers",
+      text: "Aide claire pour les problèmes quotidiens: courriel, imprimante, Wi-Fi, logiciels, comptes, lenteur, configuration et accompagnement pas à pas.",
+      items: ["Technicien informatique Laval", "Soutien informatique", "Courriel et imprimante", "Configuration logicielle"],
+    },
+    {
+      id: "ordinateur-lent-laval",
+      icon: "sparkles",
+      title: "Entretien et optimisation d’ordinateur lent",
+      text: "Nettoyage utile, mises à jour, démarrage, sécurité de base et recommandations pour prolonger la vie de votre ordinateur avant de le remplacer.",
+      items: ["Ordinateur lent Laval", "Entretien informatique", "Optimisation Windows", "Prévention"],
+    },
+    {
+      id: "support-informatique-pme-laval",
+      icon: "building",
+      title: "Support informatique PME Laval",
+      text: "Soutien flexible pour petites entreprises et travailleurs autonomes: postes, courriels professionnels, réseau, sauvegardes, Microsoft 365 et Google Workspace.",
+      items: ["PME Laval", "Courriel professionnel", "Microsoft 365", "Réseau et sauvegardes"],
+    },
+  ],
+  en: [
+    {
+      id: "computer-repair-laval",
+      icon: "laptop",
+      title: "Computer repair Laval and PC repair",
+      text: "Diagnostics for slow, frozen, infected or unstable PCs and laptops. Info Dorais checks the symptoms, protects your data when possible and recommends a realistic fix.",
+      items: ["PC repair Laval", "Windows installation", "Virus removal", "Data transfer"],
+    },
+    {
+      id: "it-support-laval",
+      icon: "tool",
+      title: "IT support Laval for home users",
+      text: "Clear help for everyday issues: email, printers, Wi-Fi, software, accounts, slow computers, configuration and step-by-step guidance.",
+      items: ["IT technician Laval", "Computer support", "Email and printers", "Software setup"],
+    },
+    {
+      id: "slow-computer-laval",
+      icon: "sparkles",
+      title: "Slow computer maintenance and optimization",
+      text: "Useful cleanup, updates, startup review, basic security and recommendations to extend your computer’s life before replacing it.",
+      items: ["Slow computer Laval", "Computer maintenance", "Windows optimization", "Prevention"],
+    },
+    {
+      id: "small-business-it-support-laval",
+      icon: "building",
+      title: "Small business IT support Laval",
+      text: "Flexible support for small businesses and self-employed workers: workstations, business email, networks, backups, Microsoft 365 and Google Workspace.",
+      items: ["Small business Laval", "Business email", "Microsoft 365", "Network and backups"],
+    },
+  ],
+} satisfies Record<Locale, ServiceSeoSection[]>;
 
 const detailMap = {
   fr: {
@@ -113,10 +184,10 @@ const detailCards =
   pageKey === "privacy" || pageKey === "contact" || pageKey === "faq" || pageKey === "home" || pageKey === "services"
     ? []
     : detailMap[locale][pageKey as DetailPageKey] ?? detailMap[locale].services;
+const servicesSections = serviceSeoSections[locale];
 ---
 
 <Hero locale={locale} page={page} pageKey={pageKey} />
-{!isPrivacy && pageKey === "remote" && <RemoteSupportProcedure locale={locale} />}
 
 {isPrivacy ? (
   <section class="section">
@@ -156,6 +227,34 @@ const detailCards =
         </div>
       </section>
     )}
+
+    {pageKey === "services" && (
+      <section class="section">
+        <div class="container">
+          <SectionIntro
+            label={locale === "fr" ? "Services à Laval" : "Services in Laval"}
+            title={locale === "fr" ? "L’essentiel au même endroit, sans multiplier les pages." : "The essentials in one place without multiplying pages."}
+            text={locale === "fr" ? "Chaque section garde les bons mots-clés locaux pour Google, mais l’expérience reste plus simple pour les visiteurs." : "Each section keeps the right local keywords for Google while keeping the visitor experience simpler."}
+          />
+          <div class="grid gap-4 lg:grid-cols-2">
+            {servicesSections.map((item) => (
+              <article id={item.id} class="card card-hover scroll-mt-28 p-6 sm:p-8">
+                <Icon name={item.icon} class="size-7 text-primary" />
+                <h2 class="mt-5 font-heading text-2xl font-black leading-tight sm:text-3xl">{item.title}</h2>
+                <p class="mt-4 text-sm leading-7 text-muted-foreground">{item.text}</p>
+                <div class="mt-5 flex flex-wrap gap-2 border-t border-border pt-4">
+                  {item.items.map((service) => (
+                    <span class="bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">{service}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {pageKey === "services" && <RemoteSupportProcedure locale={locale} />}
 
     {!isHome && !isContact && !isFaq && detailCards.length > 0 && (
       <section class="section">
@@ -256,7 +355,7 @@ const detailCards =
     )}
 
     {(isHome || isFaq) && (
-      <section class="section">
+      <section class="section" id={isHome ? "faq" : undefined}>
         <div class="container">
           <FAQBlock locale={locale} />
         </div>
@@ -294,7 +393,7 @@ const detailCards =
               <div class="mt-5 grid gap-3 text-sm">
                 <a class="card flex items-center gap-3 p-4 hover:border-primary/45" href={brand.phoneHref}><Icon name="phone" class="size-5 text-primary" /> {brand.phone}</a>
                 <a class="card flex items-center gap-3 p-4 hover:border-primary/45" href={brand.emailHref}><Icon name="mail" class="size-5 text-primary" /> {brand.email}</a>
-                <a class="btn btn-secondary" href={paths.remote[locale]}><Icon name="monitor" class="size-5" /> {t.remote}</a>
+                <a class="btn btn-secondary" href={`${paths.services[locale]}#${locale === "fr" ? "espace-client" : "client-area"}`}><Icon name="monitor" class="size-5" /> {t.remote}</a>
               </div>
             </div>
             {isHome && <FAQBlock locale={locale} limit={3} />}

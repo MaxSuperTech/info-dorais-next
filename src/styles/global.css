@@ -142,18 +142,22 @@ img {
 }
 
 .home-dot {
-  height: 3px;
-  flex: 1;
+  width: .68rem;
+  height: .68rem;
+  flex: 0 0 auto;
   border: 0;
+  border-radius: 999px;
   background: rgba(255, 255, 255, .36);
   padding: 0;
-  transition: background-color 180ms ease, transform 180ms ease;
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
 .home-dot:hover,
 .home-dot:focus-visible,
 .home-dot.is-active {
   background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, .18);
+  transform: scale(1.08);
 }
 
 .home-dot:focus-visible {

@@ -29,7 +29,7 @@ const t = ui[locale];
       <h2 class="text-sm font-black uppercase tracking-[0.12em] text-background/60">{locale === "fr" ? "Navigation" : "Navigation"}</h2>
       <div class="mt-4 grid gap-2">
         {nav[locale].map((item) => (
-          <a class="link-underline w-fit text-sm text-background/78 hover:text-background" href={paths[item.key][locale]}>{item.label}</a>
+          <a class="link-underline w-fit text-sm text-background/78 hover:text-background" href={item.href ?? paths[item.key][locale]}>{item.label}</a>
         ))}
         <a class="link-underline w-fit text-sm text-background/78 hover:text-background" href={paths.privacy[locale]}>{t.privacy}</a>
       </div>

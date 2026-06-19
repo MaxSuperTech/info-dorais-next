@@ -78,24 +78,20 @@ export const paths: Record<PageKey, Record<Locale, string>> = {
   privacy: { fr: "/politique-confidentialite", en: "/en/privacy-policy" },
 };
 
-export const nav: Record<Locale, { label: string; key: PageKey }[]> = {
+export type NavItem = { label: string; key: PageKey; href?: string };
+
+export const nav: Record<Locale, NavItem[]> = {
   fr: [
-    { label: "Accueil", key: "home" },
     { label: "Services", key: "services" },
-    { label: "Réparation", key: "repair" },
-    { label: "À distance", key: "remote" },
-    { label: "PME", key: "business" },
-    { label: "FAQ", key: "faq" },
+    { label: "À propos", key: "about" },
     { label: "Contact", key: "contact" },
+    { label: "Espace client", key: "remote", href: "/services#espace-client" },
   ],
   en: [
-    { label: "Home", key: "home" },
     { label: "Services", key: "services" },
-    { label: "Repair", key: "repair" },
-    { label: "Remote", key: "remote" },
-    { label: "Business", key: "business" },
-    { label: "FAQ", key: "faq" },
+    { label: "About", key: "about" },
     { label: "Contact", key: "contact" },
+    { label: "Client area", key: "remote", href: "/en/services#client-area" },
   ],
 };
 
@@ -407,7 +403,7 @@ export const primaryServices = {
       title: "Réparation PC et portable",
       text: "Diagnostic, lenteur, erreurs Windows, démarrage, composants, installation et transfert de données.",
       icon: "laptop",
-      href: paths.repair.fr,
+      href: `${paths.services.fr}#reparation-ordinateur-laval`,
       image: "/images/repair-refresh.webp",
       tags: ["réparation PC Laval", "portable lent", "Windows"],
     },
@@ -415,7 +411,7 @@ export const primaryServices = {
       title: "Support à distance",
       text: "Assistance rapide pour Windows, courriel, logiciels, imprimantes et configuration simple.",
       icon: "monitor",
-      href: paths.remote.fr,
+      href: `${paths.services.fr}#espace-client`,
       image: "/images/remote-refresh.webp",
       tags: ["support Québec", "AnyDesk", "Assistance rapide"],
     },
@@ -423,7 +419,7 @@ export const primaryServices = {
       title: "Entretien et optimisation",
       text: "Nettoyage, optimisation, vérifications, sécurité de base et recommandations de prévention.",
       icon: "sparkles",
-      href: paths.maintenance.fr,
+      href: `${paths.services.fr}#ordinateur-lent-laval`,
       image: "/images/security-refresh.webp",
       tags: ["ordinateur lent", "entretien", "prévention"],
     },
@@ -431,7 +427,7 @@ export const primaryServices = {
       title: "PME et travailleurs autonomes",
       text: "Postes, courriels, réseau, sauvegardes, Microsoft 365, Google Workspace et support aux utilisateurs.",
       icon: "building",
-      href: paths.business.fr,
+      href: `${paths.services.fr}#support-informatique-pme-laval`,
       image: "/images/pme-refresh.webp",
       tags: ["PME Laval", "courriels", "réseau"],
     },
@@ -441,7 +437,7 @@ export const primaryServices = {
       title: "PC and laptop repair",
       text: "Diagnostics, slowdowns, Windows errors, startup issues, components, installation and data transfer.",
       icon: "laptop",
-      href: paths.repair.en,
+      href: `${paths.services.en}#computer-repair-laval`,
       image: "/images/repair-refresh.webp",
       tags: ["PC repair Laval", "slow laptop", "Windows"],
     },
@@ -449,7 +445,7 @@ export const primaryServices = {
       title: "Remote support",
       text: "Fast help for Windows, email, software, printers and simple configuration.",
       icon: "monitor",
-      href: paths.remote.en,
+      href: `${paths.services.en}#client-area`,
       image: "/images/remote-refresh.webp",
       tags: ["Quebec support", "AnyDesk", "Quick Assist"],
     },
@@ -457,7 +453,7 @@ export const primaryServices = {
       title: "Maintenance and optimization",
       text: "Cleanup, optimization, checks, basic security and prevention recommendations.",
       icon: "sparkles",
-      href: paths.maintenance.en,
+      href: `${paths.services.en}#slow-computer-laval`,
       image: "/images/security-refresh.webp",
       tags: ["slow computer", "maintenance", "prevention"],
     },
@@ -465,7 +461,7 @@ export const primaryServices = {
       title: "Small businesses",
       text: "Workstations, email, network, backups, Microsoft 365, Google Workspace and user support.",
       icon: "building",
-      href: paths.business.en,
+      href: `${paths.services.en}#small-business-it-support-laval`,
       image: "/images/pme-refresh.webp",
       tags: ["small business", "email", "network"],
     },
@@ -621,7 +617,7 @@ export function getPageKeyByPath(locale: Locale, path: string): PageKey {
 }
 
 export function getStaticPages(locale: Locale) {
-  return (Object.keys(paths) as PageKey[])
-    .filter((key) => key !== "home")
+  const visiblePages: PageKey[] = ["services", "about", "contact", "privacy"];
+  return visiblePages
     .map((key) => ({ key, slug: paths[key][locale].split("/").filter(Boolean).pop() ?? "" }));
 }

@@ -1,7 +1,7 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import { brand, faqs, otherLocale, pages, paths, type Locale, type PageKey } from "@/data/site";
+import { allServices, brand, faqs, otherLocale, pages, paths, type Locale, type PageKey } from "@/data/site";
 import "@/styles/global.css";
 
 const { locale, pageKey } = Astro.props as { locale: Locale; pageKey: PageKey };
@@ -49,6 +49,17 @@ const faqJsonLd = {
     },
   })),
 };
+
+const servicesJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: locale === "fr" ? "Services informatiques Info Dorais" : "Info Dorais IT services",
+  itemListElement: allServices[locale].map((service, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: service,
+  })),
+};
 ---
 
 <!doctype html>
@@ -87,6 +98,9 @@ const faqJsonLd = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)} />
     {(pageKey === "home" || pageKey === "faq" || pageKey === "contact") && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    )}
+    {pageKey === "services" && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(servicesJsonLd)} />
     )}
     <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   </head>

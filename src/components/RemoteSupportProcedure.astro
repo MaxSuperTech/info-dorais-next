@@ -68,9 +68,10 @@ const remoteSupport = {
 } as const;
 
 const copy = remoteSupport[locale];
+const sectionId = locale === "fr" ? "espace-client" : "client-area";
 ---
 
-<section class="section bg-card" id="procedure-support">
+<section class="section bg-card" id={sectionId}>
   <div class="container">
     <div class="mb-10 max-w-3xl">
       <span class="badge">{copy.label}</span>

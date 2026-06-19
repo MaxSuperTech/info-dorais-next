@@ -1,0 +1,13 @@
+Redirect 301 "/reparation-ordinateur" "/services#reparation-ordinateur-laval"
+Redirect 301 "/support-distance" "/services#espace-client"
+Redirect 301 "/entretien-optimisation" "/services#ordinateur-lent-laval"
+Redirect 301 "/pme" "/services#support-informatique-pme-laval"
+Redirect 301 "/courriel-solutions-web" "/services#support-informatique-pme-laval"
+Redirect 301 "/faq" "/#faq"
+
+Redirect 301 "/en/reparation-ordinateur" "/en/services#computer-repair-laval"
+Redirect 301 "/en/support-distance" "/en/services#client-area"
+Redirect 301 "/en/maintenance-optimization" "/en/services#slow-computer-laval"
+Redirect 301 "/en/small-business" "/en/services#small-business-it-support-laval"
+Redirect 301 "/en/email-web-solutions" "/en/services#small-business-it-support-laval"
+Redirect 301 "/en/faq" "/en/#faq"
