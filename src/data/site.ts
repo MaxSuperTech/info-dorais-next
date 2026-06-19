@@ -218,15 +218,15 @@ export const pages = {
       intro: "Le but: que vos communications et outils web soient fiables, compréhensibles et faciles à administrer.",
     },
     about: {
-      title: "À propos | Technicien informatique Laval | Info Dorais",
+      title: "Maxime Dorais | Technicien informatique Laval | Info Dorais",
       description:
-        "Découvrez Info Dorais, service informatique humain, clair et professionnel à Laval fondé par Maxime Dorais.",
+        "Découvrez Maxime Dorais, fondateur d’Info Dorais, technicien informatique à Laval formé à Paul-Émile-Dufresne.",
       eyebrow: "À propos",
-      h1: "Un technicien informatique local, accessible et orienté solution.",
+      h1: "Maxime Dorais, technicien informatique à Laval.",
       lead:
-        "Info Dorais existe pour rendre l’informatique moins stressante: comprendre le problème, expliquer clairement, agir proprement.",
+        "Passionné d’informatique depuis l’enfance, j’ai complété un DEP en informatique à Paul-Émile-Dufresne et lancé Info Dorais pour offrir un service professionnel, simple et fiable.",
       image: "/images/about-refresh.webp",
-      intro: "Le service s’adresse aux particuliers, travailleurs autonomes et petites entreprises qui veulent de l’aide claire et fiable.",
+      intro: "Info Dorais s’adresse aux particuliers, travailleurs autonomes et petites entreprises qui veulent une aide informatique claire, humaine et structurée.",
     },
     faq: {
       title: "FAQ informatique Laval | Info Dorais",
@@ -341,15 +341,15 @@ export const pages = {
       intro: "The goal: keep your communications and web tools reliable, understandable and easy to manage.",
     },
     about: {
-      title: "About | IT technician Laval | Info Dorais",
+      title: "Maxime Dorais | IT technician Laval | Info Dorais",
       description:
-        "Learn about Info Dorais, a human, clear and professional IT service in Laval founded by Maxime Dorais.",
+        "Learn about Maxime Dorais, founder of Info Dorais, an IT technician in Laval trained at Paul-Émile-Dufresne.",
       eyebrow: "About",
-      h1: "A local IT technician who is accessible and solution-oriented.",
+      h1: "Maxime Dorais, IT technician in Laval.",
       lead:
-        "Info Dorais exists to make IT less stressful: understand the issue, explain clearly and act cleanly.",
+        "Passionate about computers since childhood and trained in IT at Paul-Émile-Dufresne, I launched Info Dorais to offer a professional, simple and reliable service.",
       image: "/images/about-refresh.webp",
-      intro: "The service is built for home users, self-employed workers and small businesses that want clear and reliable help.",
+      intro: "Info Dorais is built for home users, self-employed workers and small businesses that want clear, human and structured IT help.",
     },
     faq: {
       title: "IT FAQ Laval | Info Dorais",

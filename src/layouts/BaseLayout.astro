@@ -18,6 +18,10 @@ const localBusinessJsonLd = {
   url: brand.baseUrl,
   telephone: "+14502410302",
   email: brand.email,
+  founder: {
+    "@type": "Person",
+    name: brand.owner,
+  },
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",
