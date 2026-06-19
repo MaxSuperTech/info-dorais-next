@@ -65,11 +65,13 @@ const carouselSlides =
   <div class="absolute inset-0 bg-[linear-gradient(115deg,rgba(20,85,155,.10),transparent_38%)]"></div>
   <div
     class:list={[
-      "container relative grid min-h-[calc(100dvh-76px)] items-center gap-8 py-12 lg:py-14",
-      isHome ? "lg:grid-cols-[minmax(0,1fr)_430px] xl:grid-cols-[minmax(0,1fr)_470px]" : "lg:grid-cols-1",
+      "container relative grid min-h-[calc(100dvh-76px)] items-center gap-8",
+      isHome
+        ? "pt-5 pb-12 lg:grid-cols-[minmax(0,1fr)_430px] lg:py-14 xl:grid-cols-[minmax(0,1fr)_470px]"
+        : "py-12 lg:grid-cols-1 lg:py-14",
     ]}
   >
-    <div class="max-w-4xl reveal">
+    <div class:list={["max-w-4xl reveal", isHome && "order-2 lg:order-1"]}>
       <span class="badge">{page.eyebrow}</span>
       <h1 class="mt-5 font-heading text-4xl font-black leading-[1.04] sm:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">{page.h1}</h1>
       <p class="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">{page.lead}</p>
@@ -94,7 +96,7 @@ const carouselSlides =
     </div>
 
     {isHome && (
-      <aside class="home-carousel reveal" aria-label={locale === "fr" ? "Points forts Info Dorais" : "Info Dorais highlights"} data-home-carousel>
+      <aside class="home-carousel order-1 reveal lg:order-2" aria-label={locale === "fr" ? "Points forts Info Dorais" : "Info Dorais highlights"} data-home-carousel>
         {carouselSlides.map((slide, index) => (
           <article
             class:list={["home-slide", index === 0 && "is-active"]}
@@ -111,7 +113,7 @@ const carouselSlides =
               class="home-slide-media"
             />
             <div class="home-slide-overlay"></div>
-            <div class="relative flex min-h-[360px] flex-col justify-start p-5 pt-7 text-background sm:min-h-[430px] sm:justify-end sm:p-7">
+            <div class="relative flex min-h-[360px] flex-col justify-end p-5 text-background sm:min-h-[430px] sm:p-7">
               <span class="text-xs font-black uppercase tracking-[0.16em] text-background/72">{slide.kicker}</span>
               <h2 class="mt-3 font-heading text-4xl font-black leading-none sm:text-5xl">{slide.title}</h2>
               <p class="mt-4 max-w-sm text-sm font-bold leading-6 text-background/76 sm:text-base">{slide.text}</p>
