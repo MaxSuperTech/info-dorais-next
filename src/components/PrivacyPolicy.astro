@@ -1,0 +1,263 @@
+---
+import Icon from "@/components/Icon.astro";
+import { brand, type Locale } from "@/data/site";
+
+const { locale } = Astro.props as { locale: Locale };
+
+const updated = locale === "fr" ? "19 juin 2026" : "June 19, 2026";
+const contactHref = brand.emailHref;
+
+const copy = {
+  fr: {
+    label: "Confidentialité",
+    title: "Politique de confidentialité",
+    intro:
+      "Cette politique explique quels renseignements Info Dorais peut recueillir, pourquoi ils sont utilisés, avec qui ils peuvent être partagés et comment demander l’accès, la correction ou la suppression de vos renseignements.",
+    updated: `Dernière mise à jour : ${updated}`,
+    quickTitle: "Résumé rapide",
+    quickItems: [
+      "Info Dorais recueille seulement les renseignements nécessaires pour répondre à une demande de service.",
+      "Les renseignements ne sont pas vendus et ne sont pas utilisés pour de la publicité ciblée.",
+      "Le formulaire utilise Cloudflare Turnstile pour réduire le spam.",
+      "Vous pouvez demander l’accès, la correction ou la suppression de vos renseignements.",
+    ],
+    contactTitle: "Responsable",
+    contactText: "Pour toute question sur cette politique ou sur vos renseignements personnels :",
+    sections: [
+      {
+        title: "1. Responsable de la protection des renseignements personnels",
+        body: [
+          `Info Dorais est exploité par ${brand.owner}. Pour les demandes relatives à la confidentialité, vous pouvez communiquer avec Info Dorais par courriel ou par téléphone.`,
+          "Les demandes sont traitées de manière raisonnable selon la nature de la demande, les obligations applicables et les renseignements réellement détenus.",
+        ],
+      },
+      {
+        title: "2. Renseignements pouvant être recueillis",
+        body: [
+          "Lorsque vous utilisez le formulaire de contact, Info Dorais peut recevoir votre nom, votre adresse courriel, votre numéro de téléphone, la langue choisie et la description de votre besoin informatique.",
+          "La description peut contenir des renseignements sur votre appareil, vos symptômes, des messages d’erreur, votre niveau d’urgence ou le contexte de votre demande.",
+          "Des renseignements techniques peuvent aussi être traités pour la sécurité du formulaire, notamment l’adresse IP, certains signaux du navigateur, le jeton Cloudflare Turnstile et les champs nécessaires à la validation anti-spam.",
+          "Lors d’un support à distance, des identifiants de session ou codes temporaires peuvent être utilisés seulement lorsque vous demandez ou acceptez explicitement une session.",
+        ],
+      },
+      {
+        title: "3. Pourquoi ces renseignements sont utilisés",
+        body: [
+          "Les renseignements servent à répondre à votre demande, poser les bonnes questions, proposer une intervention appropriée, planifier un rendez-vous, effectuer un suivi et assurer la sécurité du formulaire.",
+          "Ils peuvent aussi servir à conserver un historique minimal des communications nécessaires au service, par exemple pour comprendre une demande précédente ou éviter de répéter les mêmes étapes.",
+        ],
+      },
+      {
+        title: "4. Consentement et collecte limitée",
+        body: [
+          "En envoyant le formulaire, vous consentez à ce que les renseignements transmis soient utilisés pour répondre à votre demande.",
+          "Info Dorais vise à recueillir seulement les renseignements nécessaires. Évitez d’envoyer des mots de passe, données bancaires, numéros d’assurance sociale ou autres renseignements très sensibles, sauf si une situation particulière l’exige et qu’une méthode appropriée a été convenue.",
+        ],
+      },
+      {
+        title: "5. Partage avec des fournisseurs ou services externes",
+        body: [
+          "Info Dorais ne vend pas vos renseignements personnels.",
+          "Certains fournisseurs peuvent traiter des renseignements nécessaires au fonctionnement du site ou du service, par exemple l’hébergement web, le service courriel, Cloudflare Turnstile pour la protection anti-spam, Microsoft Assistance rapide ou AnyDesk lorsque vous utilisez volontairement ces outils.",
+          "Des renseignements peuvent aussi être communiqués si la loi l’exige, pour protéger les droits d’Info Dorais ou pour répondre à une demande légitime d’une autorité compétente.",
+        ],
+      },
+      {
+        title: "6. Témoins, outils techniques et services tiers",
+        body: [
+          "Le site peut utiliser le stockage local du navigateur pour conserver votre préférence de thème clair ou sombre. Ce réglage n’est pas utilisé pour vous identifier.",
+          "Le site charge des polices Google Fonts et le script Cloudflare Turnstile. Ces services peuvent traiter certains renseignements techniques, comme l’adresse IP ou des informations sur le navigateur, selon leurs propres politiques.",
+          "Info Dorais n’utilise pas actuellement de publicité ciblée ni de profilage publicitaire sur ce site.",
+        ],
+      },
+      {
+        title: "7. Conservation",
+        body: [
+          "Les demandes reçues par formulaire ou courriel peuvent être conservées aussi longtemps que nécessaire pour répondre à la demande, fournir le service, assurer le suivi, respecter des obligations légales ou gérer les dossiers administratifs.",
+          "Lorsqu’un renseignement n’est plus nécessaire, Info Dorais peut le supprimer, l’archiver de façon limitée ou l’anonymiser lorsque cela est approprié.",
+        ],
+      },
+      {
+        title: "8. Sécurité",
+        body: [
+          "Info Dorais applique des mesures raisonnables pour protéger les renseignements transmis contre l’accès non autorisé, la perte ou l’utilisation inappropriée.",
+          "Aucune transmission par Internet ou par courriel ne peut toutefois être garantie parfaitement sécurisée. Si votre demande contient des renseignements sensibles, il est préférable de communiquer d’abord avec Info Dorais pour choisir la méthode la plus appropriée.",
+        ],
+      },
+      {
+        title: "9. Vos droits",
+        body: [
+          "Vous pouvez demander l’accès aux renseignements personnels vous concernant, demander une correction, retirer votre consentement lorsque applicable ou demander la suppression de certains renseignements.",
+          "Une demande peut être refusée ou limitée lorsque la loi le permet, par exemple si certains renseignements doivent être conservés pour des obligations légales, fiscales, contractuelles ou de sécurité.",
+          "Si vous n’êtes pas satisfait du traitement d’une demande, vous pouvez communiquer avec la Commission d’accès à l’information du Québec.",
+        ],
+      },
+      {
+        title: "10. Liens externes",
+        body: [
+          "Le site peut contenir des liens vers des services externes comme Microsoft, AnyDesk ou Cloudflare. Info Dorais ne contrôle pas leurs sites, leurs outils ni leurs politiques de confidentialité.",
+          "Avant d’utiliser un service externe, il est recommandé de consulter les conditions et politiques du fournisseur concerné.",
+        ],
+      },
+      {
+        title: "11. Modifications",
+        body: [
+          "Cette politique peut être mise à jour pour refléter les changements au site, aux services, aux outils utilisés ou aux obligations applicables.",
+          "La date de mise à jour indiquée en haut de la page permet d’identifier la version la plus récente.",
+        ],
+      },
+    ],
+  },
+  en: {
+    label: "Privacy",
+    title: "Privacy policy",
+    intro:
+      "This policy explains what information Info Dorais may collect, why it is used, who it may be shared with and how to request access, correction or deletion of your information.",
+    updated: `Last updated: ${updated}`,
+    quickTitle: "Quick summary",
+    quickItems: [
+      "Info Dorais only collects the information needed to respond to a service request.",
+      "Information is not sold and is not used for targeted advertising.",
+      "The form uses Cloudflare Turnstile to reduce spam.",
+      "You may request access, correction or deletion of your information.",
+    ],
+    contactTitle: "Responsible contact",
+    contactText: "For questions about this policy or your personal information:",
+    sections: [
+      {
+        title: "1. Person responsible for personal information",
+        body: [
+          `Info Dorais is operated by ${brand.owner}. For privacy-related requests, you can contact Info Dorais by email or phone.`,
+          "Requests are handled reasonably according to the nature of the request, applicable obligations and the information actually held.",
+        ],
+      },
+      {
+        title: "2. Information that may be collected",
+        body: [
+          "When you use the contact form, Info Dorais may receive your name, email address, phone number, selected language and description of your IT need.",
+          "The description may include information about your device, symptoms, error messages, urgency level or request context.",
+          "Technical information may also be processed for form security, including IP address, browser signals, the Cloudflare Turnstile token and fields needed for anti-spam validation.",
+          "During remote support, session identifiers or temporary codes may be used only when you request or explicitly accept a session.",
+        ],
+      },
+      {
+        title: "3. Why this information is used",
+        body: [
+          "Information is used to respond to your request, ask the right questions, suggest an appropriate intervention, schedule an appointment, follow up and secure the form.",
+          "It may also be used to keep a minimal communication history needed for service, for example to understand a previous request or avoid repeating the same steps.",
+        ],
+      },
+      {
+        title: "4. Consent and limited collection",
+        body: [
+          "By submitting the form, you consent to the information you send being used to respond to your request.",
+          "Info Dorais aims to collect only necessary information. Avoid sending passwords, banking details, social insurance numbers or other highly sensitive information unless a specific situation requires it and an appropriate method has been agreed upon.",
+        ],
+      },
+      {
+        title: "5. Sharing with providers or external services",
+        body: [
+          "Info Dorais does not sell your personal information.",
+          "Some providers may process information needed to operate the site or service, such as web hosting, email service, Cloudflare Turnstile for anti-spam protection, Microsoft Quick Assist or AnyDesk when you voluntarily use those tools.",
+          "Information may also be disclosed if required by law, to protect Info Dorais’ rights or to respond to a legitimate request from a competent authority.",
+        ],
+      },
+      {
+        title: "6. Cookies, technical tools and third-party services",
+        body: [
+          "The site may use browser local storage to remember your light or dark theme preference. This setting is not used to identify you.",
+          "The site loads Google Fonts and the Cloudflare Turnstile script. These services may process certain technical information, such as IP address or browser information, according to their own policies.",
+          "Info Dorais does not currently use targeted advertising or advertising profiling on this site.",
+        ],
+      },
+      {
+        title: "7. Retention",
+        body: [
+          "Requests received by form or email may be kept as long as needed to respond, provide service, follow up, meet legal obligations or manage administrative records.",
+          "When information is no longer needed, Info Dorais may delete it, archive it in a limited way or anonymize it where appropriate.",
+        ],
+      },
+      {
+        title: "8. Security",
+        body: [
+          "Info Dorais applies reasonable measures to protect information against unauthorized access, loss or misuse.",
+          "No internet or email transmission can be guaranteed perfectly secure. If your request contains sensitive information, it is best to contact Info Dorais first to choose the most appropriate method.",
+        ],
+      },
+      {
+        title: "9. Your rights",
+        body: [
+          "You may request access to your personal information, ask for a correction, withdraw consent where applicable or request deletion of certain information.",
+          "A request may be refused or limited where the law allows it, for example if certain information must be kept for legal, tax, contractual or security obligations.",
+          "If you are not satisfied with the handling of a request, you may contact the Commission d’accès à l’information du Québec.",
+        ],
+      },
+      {
+        title: "10. External links",
+        body: [
+          "The site may contain links to external services such as Microsoft, AnyDesk or Cloudflare. Info Dorais does not control their sites, tools or privacy policies.",
+          "Before using an external service, it is recommended to review that provider’s terms and policies.",
+        ],
+      },
+      {
+        title: "11. Changes",
+        body: [
+          "This policy may be updated to reflect changes to the site, services, tools used or applicable obligations.",
+          "The update date at the top of the page identifies the most recent version.",
+        ],
+      },
+    ],
+  },
+} as const;
+
+const t = copy[locale];
+---
+
+<section class="section bg-background">
+  <div class="container">
+    <div class="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
+      <aside class="card order-2 p-5 lg:sticky lg:top-24 lg:order-1">
+        <span class="badge">{t.label}</span>
+        <h2 class="mt-4 font-heading text-2xl font-black">{t.quickTitle}</h2>
+        <ul class="mt-5 grid gap-3 text-sm leading-6 text-muted-foreground">
+          {t.quickItems.map((item) => (
+            <li class="flex gap-3">
+              <Icon name="check" class="mt-0.5 size-4 shrink-0 text-primary" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-6 border-t border-border pt-5 text-sm leading-6">
+          <strong class="block font-black">{t.contactTitle}</strong>
+          <p class="mt-2 text-muted-foreground">{t.contactText}</p>
+          <a class="mt-3 flex items-center gap-2 font-bold text-primary hover:underline" href={contactHref}>
+            <Icon name="mail" class="size-4" />
+            {brand.email}
+          </a>
+          <a class="mt-2 flex items-center gap-2 font-bold text-primary hover:underline" href={brand.phoneHref}>
+            <Icon name="phone" class="size-4" />
+            {brand.phone}
+          </a>
+        </div>
+      </aside>
+
+      <article class="card order-1 p-6 sm:p-10 lg:order-2">
+        <span class="badge">{t.label}</span>
+        <h1 class="mt-5 font-heading text-4xl font-black leading-tight sm:text-5xl">{t.title}</h1>
+        <p class="mt-4 text-sm font-bold text-primary">{t.updated}</p>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{t.intro}</p>
+
+        <div class="mt-10 grid gap-8">
+          {t.sections.map((section) => (
+            <section class="border-t border-border pt-7">
+              <h2 class="font-heading text-2xl font-black leading-tight">{section.title}</h2>
+              <div class="mt-4 grid gap-4 text-sm leading-7 text-muted-foreground">
+                {section.body.map((paragraph) => <p>{paragraph}</p>)}
+              </div>
+            </section>
+          ))}
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

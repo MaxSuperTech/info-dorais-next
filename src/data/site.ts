@@ -253,13 +253,13 @@ export const pages = {
     privacy: {
       title: "Politique de confidentialité | Info Dorais",
       description:
-        "Politique de confidentialité du site Info Dorais pour les demandes de contact et informations transmises par formulaire.",
+        "Politique de confidentialité d’Info Dorais: formulaire de contact, Cloudflare Turnstile, conservation, partage et droits d’accès.",
       eyebrow: "Confidentialité",
-      h1: "Une politique simple sur les informations transmises à Info Dorais.",
+      h1: "Politique de confidentialité",
       lead:
-        "Cette page explique quelles informations peuvent être envoyées par le formulaire et comment elles sont utilisées.",
+        "Cette page explique les renseignements personnels recueillis, leur utilisation, leur conservation et vos droits.",
       image: "/images/contact-refresh.webp",
-      intro: "Info Dorais collecte seulement les informations nécessaires pour répondre aux demandes de service.",
+      intro: "Info Dorais collecte seulement les renseignements nécessaires pour répondre aux demandes de service.",
     },
   },
   en: {
@@ -376,11 +376,11 @@ export const pages = {
     privacy: {
       title: "Privacy policy | Info Dorais",
       description:
-        "Privacy policy for the Info Dorais website and information submitted through the contact form.",
+        "Info Dorais privacy policy: contact form, Cloudflare Turnstile, retention, sharing and access rights.",
       eyebrow: "Privacy",
-      h1: "A simple policy about information sent to Info Dorais.",
+      h1: "Privacy policy",
       lead:
-        "This page explains what information may be sent through the form and how it is used.",
+        "This page explains what personal information is collected, how it is used, retained and how to exercise your rights.",
       image: "/images/contact-refresh.webp",
       intro: "Info Dorais only collects the information needed to respond to service requests.",
     },

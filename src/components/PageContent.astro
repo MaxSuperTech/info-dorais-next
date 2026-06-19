@@ -3,6 +3,7 @@ import ContactForm from "@/components/ContactForm.astro";
 import FAQBlock from "@/components/FAQBlock.astro";
 import Hero from "@/components/Hero.astro";
 import Icon from "@/components/Icon.astro";
+import PrivacyPolicy from "@/components/PrivacyPolicy.astro";
 import RemoteSupportProcedure from "@/components/RemoteSupportProcedure.astro";
 import SectionIntro from "@/components/SectionIntro.astro";
 import ServiceCard from "@/components/ServiceCard.astro";
@@ -187,30 +188,10 @@ const detailCards =
 const servicesSections = serviceSeoSections[locale];
 ---
 
-<Hero locale={locale} page={page} pageKey={pageKey} />
+{!isPrivacy && <Hero locale={locale} page={page} pageKey={pageKey} />}
 
 {isPrivacy ? (
-  <section class="section">
-    <div class="container max-w-3xl">
-      <div class="card p-6 sm:p-10">
-        <p class="text-lg leading-8 text-muted-foreground">{page.intro}</p>
-        <div class="mt-8 grid gap-6 text-sm leading-7 text-muted-foreground">
-          <section>
-            <h2 class="font-heading text-2xl font-black text-foreground">{locale === "fr" ? "Informations collectées" : "Information collected"}</h2>
-            <p class="mt-3">{locale === "fr" ? "Le formulaire peut transmettre votre nom, courriel, téléphone et description du besoin. Ces informations servent seulement à répondre à votre demande." : "The form may send your name, email, phone number and request details. This information is used only to respond to your request."}</p>
-          </section>
-          <section>
-            <h2 class="font-heading text-2xl font-black text-foreground">{locale === "fr" ? "Conservation et partage" : "Retention and sharing"}</h2>
-            <p class="mt-3">{locale === "fr" ? "Les informations ne sont pas vendues. Elles peuvent être conservées dans les courriels nécessaires au suivi du service." : "Information is not sold. It may be kept in emails needed for service follow-up."}</p>
-          </section>
-          <section>
-            <h2 class="font-heading text-2xl font-black text-foreground">Cloudflare Turnstile</h2>
-            <p class="mt-3">{locale === "fr" ? "Le formulaire utilise Cloudflare Turnstile pour réduire le spam. Cloudflare peut traiter certains signaux techniques pour vérifier la soumission." : "The form uses Cloudflare Turnstile to reduce spam. Cloudflare may process technical signals to verify the submission."}</p>
-          </section>
-        </div>
-      </div>
-    </div>
-  </section>
+  <PrivacyPolicy locale={locale} />
 ) : (
   <>
     {showPrimaryServices && (
