@@ -98,6 +98,75 @@ img {
     linear-gradient(0deg, hsl(var(--background) / .86) 0%, transparent 36%);
 }
 
+.home-carousel {
+  position: relative;
+  min-height: 360px;
+  overflow: hidden;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--foreground));
+  box-shadow: 0 24px 70px hsl(var(--foreground) / .18);
+}
+
+.home-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.025);
+  transition: opacity 620ms ease, transform 900ms ease;
+}
+
+.home-slide.is-active {
+  z-index: 1;
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.home-slide-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .76;
+  filter: saturate(.86) contrast(1.1);
+}
+
+.home-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 17, 31, .10), rgba(7, 17, 31, .86)),
+    linear-gradient(115deg, rgba(20, 85, 155, .68), transparent 54%);
+}
+
+.home-dot {
+  height: 3px;
+  flex: 1;
+  border: 0;
+  background: hsl(var(--background) / .34);
+  padding: 0;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.home-dot:hover,
+.home-dot:focus-visible,
+.home-dot.is-active {
+  background: hsl(var(--primary));
+}
+
+.home-dot:focus-visible {
+  outline: 2px solid hsl(var(--background));
+  outline-offset: 4px;
+}
+
+@media (min-width: 640px) {
+  .home-carousel {
+    min-height: 430px;
+  }
+}
+
 ::selection {
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));

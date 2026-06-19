@@ -2,7 +2,6 @@
 import ContactForm from "@/components/ContactForm.astro";
 import FAQBlock from "@/components/FAQBlock.astro";
 import Hero from "@/components/Hero.astro";
-import HomeOutcomeStrip from "@/components/HomeOutcomeStrip.astro";
 import Icon from "@/components/Icon.astro";
 import RemoteSupportProcedure from "@/components/RemoteSupportProcedure.astro";
 import SectionIntro from "@/components/SectionIntro.astro";
@@ -114,7 +113,6 @@ const detailCards =
 ---
 
 <Hero locale={locale} page={page} pageKey={pageKey} />
-{!isPrivacy && isHome && <HomeOutcomeStrip locale={locale} />}
 {!isPrivacy && pageKey === "remote" && <RemoteSupportProcedure locale={locale} />}
 
 {isPrivacy ? (

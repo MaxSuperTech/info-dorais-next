@@ -1,42 +1,53 @@
 ---
 import Icon from "@/components/Icon.astro";
-import { brand, paths, processSteps, ui, type IconName, type Locale, type Page, type PageKey } from "@/data/site";
+import { brand, paths, processSteps, ui, type Locale, type Page, type PageKey } from "@/data/site";
 
 const { locale, page, pageKey } = Astro.props as { locale: Locale; page: Page; pageKey: PageKey };
 const t = ui[locale];
 const steps = processSteps[locale];
-const summaryTitle =
-  pageKey === "home"
-    ? locale === "fr"
-      ? "Votre informatique, prise en main."
-      : "Your IT, taken in hand."
-    : locale === "fr"
-      ? "Comprendre vite. Régler proprement."
-      : "Understand quickly. Fix cleanly.";
-const summaryItems: [IconName, string][] =
-  pageKey === "home"
-    ? locale === "fr"
-      ? [
-          ["clock", "Gain de temps"],
-          ["sparkles", "Performance"],
-          ["shield", "Moins de stress"],
-        ]
-      : [
-          ["clock", "Time saved"],
-          ["sparkles", "Performance"],
-          ["shield", "Less stress"],
-        ]
-    : locale === "fr"
-      ? [
-          ["phone", "Appel direct"],
-          ["monitor", "Support à distance"],
-          ["shield", "Session encadrée"],
-        ]
-      : [
-          ["phone", "Direct call"],
-          ["monitor", "Remote support"],
-          ["shield", "Guided session"],
-        ];
+const isHome = pageKey === "home";
+const carouselSlides =
+  locale === "fr"
+    ? [
+        {
+          kicker: "01",
+          title: "Gain de temps",
+          text: "Un diagnostic clair pour éviter les essais inutiles et choisir la bonne intervention.",
+          image: "/images/remote-refresh.webp",
+        },
+        {
+          kicker: "02",
+          title: "Performance",
+          text: "Des ordinateurs plus rapides, mieux entretenus et plus fiables au quotidien.",
+          image: "/images/repair-refresh.webp",
+        },
+        {
+          kicker: "03",
+          title: "Moins de stress",
+          text: "Un technicien local qui explique simplement et règle le problème proprement.",
+          image: "/images/pme-refresh.webp",
+        },
+      ]
+    : [
+        {
+          kicker: "01",
+          title: "Time saved",
+          text: "A clear diagnostic to avoid trial and error and choose the right intervention.",
+          image: "/images/remote-refresh.webp",
+        },
+        {
+          kicker: "02",
+          title: "Performance",
+          text: "Faster, better maintained and more reliable computers for everyday work.",
+          image: "/images/repair-refresh.webp",
+        },
+        {
+          kicker: "03",
+          title: "Less stress",
+          text: "A local technician who explains simply and fixes the issue cleanly.",
+          image: "/images/pme-refresh.webp",
+        },
+      ];
 ---
 
 <section class="relative isolate overflow-hidden border-b border-border bg-background">
@@ -47,12 +58,17 @@ const summaryItems: [IconName, string][] =
     width="1600"
     height="1000"
     class="hero-photo"
-    loading={pageKey === "home" ? "eager" : "lazy"}
+    loading={isHome ? "eager" : "lazy"}
   />
   <div class="hero-overlay"></div>
   <div class="absolute inset-x-0 top-0 h-1.5 bg-primary"></div>
   <div class="absolute inset-0 bg-[linear-gradient(115deg,rgba(20,85,155,.10),transparent_38%)]"></div>
-  <div class="container relative grid min-h-[calc(100dvh-76px)] items-center gap-8 py-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:py-14 xl:grid-cols-[minmax(0,1fr)_390px]">
+  <div
+    class:list={[
+      "container relative grid min-h-[calc(100dvh-76px)] items-center gap-8 py-12 lg:py-14",
+      isHome ? "lg:grid-cols-[minmax(0,1fr)_430px] xl:grid-cols-[minmax(0,1fr)_470px]" : "lg:grid-cols-1",
+    ]}
+  >
     <div class="max-w-4xl reveal">
       <span class="badge">{page.eyebrow}</span>
       <h1 class="mt-5 font-heading text-4xl font-black leading-[1.04] sm:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">{page.h1}</h1>
@@ -67,7 +83,7 @@ const summaryItems: [IconName, string][] =
           <Icon name="arrow" class="size-5" />
         </a>
       </div>
-      <div class="mt-9 grid border-y border-border sm:grid-cols-3">
+      <div class:list={["mt-9 grid border-y border-border sm:grid-cols-3", isHome && "hidden lg:grid"]}>
         {steps.map(([title, text]) => (
           <div class="border-b border-border py-4 sm:border-b-0 sm:border-r sm:px-4 first:sm:pl-0 last:sm:border-r-0">
             <strong class="block text-sm font-black">{title}</strong>
@@ -77,19 +93,71 @@ const summaryItems: [IconName, string][] =
       </div>
     </div>
 
-    <aside class="hidden border border-border bg-card/90 p-5 shadow-premium backdrop-blur-xl reveal lg:block" aria-label={locale === "fr" ? "Résumé du service" : "Service summary"}>
-      <span class="badge">{locale === "fr" ? "Réponse rapide" : "Fast response"}</span>
-      <strong class="mt-4 block font-heading text-3xl font-black leading-tight">
-        {summaryTitle}
-      </strong>
-      <div class="mt-6 grid gap-3 text-sm font-bold">
-        {summaryItems.map(([icon, label]) => (
-          <div class="flex items-center gap-3 border border-border bg-background/75 p-3">
-            <Icon name={icon} class="size-5 text-primary" />
-            <span>{label}</span>
-          </div>
+    {isHome && (
+      <aside class="home-carousel reveal" aria-label={locale === "fr" ? "Points forts Info Dorais" : "Info Dorais highlights"} data-home-carousel>
+        {carouselSlides.map((slide, index) => (
+          <article
+            class:list={["home-slide", index === 0 && "is-active"]}
+            aria-hidden={index === 0 ? "false" : "true"}
+            data-home-slide={index}
+          >
+            <img
+              src={slide.image}
+              alt=""
+              aria-hidden="true"
+              width="760"
+              height="620"
+              loading={index === 0 ? "eager" : "lazy"}
+              class="home-slide-media"
+            />
+            <div class="home-slide-overlay"></div>
+            <div class="relative flex min-h-[360px] flex-col justify-start p-5 pt-7 text-background sm:min-h-[430px] sm:justify-end sm:p-7">
+              <span class="text-xs font-black uppercase tracking-[0.16em] text-background/72">{slide.kicker}</span>
+              <h2 class="mt-3 font-heading text-4xl font-black leading-none sm:text-5xl">{slide.title}</h2>
+              <p class="mt-4 max-w-sm text-sm font-bold leading-6 text-background/76 sm:text-base">{slide.text}</p>
+            </div>
+          </article>
         ))}
-      </div>
-    </aside>
+        <div class="absolute inset-x-5 bottom-5 z-10 flex gap-2 sm:inset-x-7 sm:bottom-7">
+          {carouselSlides.map((slide, index) => (
+            <button
+              type="button"
+              class:list={["home-dot", index === 0 && "is-active"]}
+              aria-label={`${locale === "fr" ? "Afficher" : "Show"} ${slide.title}`}
+              data-home-dot={index}
+            ></button>
+          ))}
+        </div>
+      </aside>
+    )}
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    const carousel = document.querySelector("[data-home-carousel]");
+    if (!carousel) return;
+
+    const slides = Array.from(carousel.querySelectorAll("[data-home-slide]"));
+    const dots = Array.from(carousel.querySelectorAll("[data-home-dot]"));
+    let active = 0;
+
+    const showSlide = (nextIndex) => {
+      active = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, index) => {
+        const isActive = index === active;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+      });
+      dots.forEach((dot, index) => dot.classList.toggle("is-active", index === active));
+    };
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => showSlide(index));
+    });
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window.setInterval(() => showSlide(active + 1), 5600);
+    }
+  })();
+</script>
