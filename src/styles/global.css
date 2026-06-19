@@ -110,17 +110,26 @@ img {
 .home-slide {
   position: absolute;
   inset: 0;
+  z-index: 0;
   opacity: 0;
   pointer-events: none;
-  transform: scale(1.025);
-  transition: opacity 620ms ease, transform 900ms ease;
+  transform: translateX(1.5rem) scale(1.025);
+  transition:
+    opacity 760ms cubic-bezier(.22, 1, .36, 1),
+    transform 900ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .home-slide.is-active {
-  z-index: 1;
+  z-index: 3;
   opacity: 1;
   pointer-events: auto;
-  transform: scale(1);
+  transform: translateX(0) scale(1);
+}
+
+.home-slide.is-leaving {
+  z-index: 2;
+  opacity: 0;
+  transform: translateX(-1.25rem) scale(1.012);
 }
 
 .home-slide-media {
@@ -131,6 +140,20 @@ img {
   object-fit: cover;
   opacity: .76;
   filter: saturate(.86) contrast(1.1);
+  transform: scale(1.055);
+  transition:
+    opacity 760ms cubic-bezier(.22, 1, .36, 1),
+    transform 5200ms ease;
+}
+
+.home-slide.is-active .home-slide-media {
+  opacity: .82;
+  transform: scale(1.01);
+}
+
+.home-slide.is-leaving .home-slide-media {
+  opacity: .62;
+  transform: scale(1.035);
 }
 
 .home-slide-overlay {
@@ -139,6 +162,25 @@ img {
   background:
     linear-gradient(180deg, rgba(7, 17, 31, .10), rgba(7, 17, 31, .86)),
     linear-gradient(115deg, rgba(20, 85, 155, .68), transparent 54%);
+}
+
+.home-slide-content {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 620ms cubic-bezier(.22, 1, .36, 1) 120ms,
+    transform 720ms cubic-bezier(.22, 1, .36, 1) 120ms;
+}
+
+.home-slide.is-active .home-slide-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-slide.is-leaving .home-slide-content {
+  opacity: 0;
+  transform: translateY(-.65rem);
+  transition-delay: 0ms;
 }
 
 .home-dot-group {
@@ -311,6 +353,14 @@ details > summary::-webkit-details-marker {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
+  }
+
+  .home-slide,
+  .home-slide-media,
+  .home-slide-content {
+    transform: none !important;
+    transition-delay: 0ms !important;
+    transition-duration: 260ms !important;
+    transition-property: opacity !important;
   }
 }

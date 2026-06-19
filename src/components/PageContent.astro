@@ -136,11 +136,7 @@ const detailMap = {
       ["Travailleurs autonomes", "Courriel, outils de travail, support à distance et stabilité du poste principal."],
       ["PME", "Postes, comptes, courriels, réseau, sauvegardes et accompagnement sans jargon."],
     ],
-    about: [
-      ["Parcours local", "Maxime Dorais a complété un DEP en informatique à Paul-Émile-Dufresne, à Laval."],
-      ["Passion structurée", "La passion pour l’informatique reste au cœur du service, avec une méthode claire et professionnelle."],
-      ["Résultat clair", "Chaque intervention vise à régler le problème, expliquer la suite et réduire le stress informatique."],
-    ],
+    about: [],
   },
   en: {
     repair: [
@@ -173,16 +169,12 @@ const detailMap = {
       ["Self-employed", "Email, work tools, remote support and stability for the main workstation."],
       ["Small businesses", "Workstations, accounts, email, network, backups and jargon-free guidance."],
     ],
-    about: [
-      ["Local background", "Maxime Dorais completed a DEP in IT at Paul-Émile-Dufresne in Laval."],
-      ["Structured passion", "A long-standing passion for computers is paired with a clear and professional method."],
-      ["Clear result", "Each intervention aims to solve the issue, explain the next steps and reduce IT stress."],
-    ],
+    about: [],
   },
 } as const;
 
 const detailCards =
-  pageKey === "privacy" || pageKey === "contact" || pageKey === "faq" || pageKey === "home" || pageKey === "services"
+  pageKey === "privacy" || pageKey === "contact" || pageKey === "faq" || pageKey === "home" || pageKey === "services" || pageKey === "about"
     ? []
     : detailMap[locale][pageKey as DetailPageKey] ?? detailMap[locale].services;
 const servicesSections = serviceSeoSections[locale];
@@ -256,8 +248,8 @@ const servicesSections = serviceSeoSections[locale];
         <div class="container grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
           <SectionIntro
             label={locale === "fr" ? "Ce qu’on règle" : "What we solve"}
-            title={locale === "fr" ? "Des irritants concrets, pas des promesses vagues." : "Concrete problems, not vague promises."}
-            text={locale === "fr" ? "Le site est optimisé pour les recherches locales, mais le contenu reste écrit pour les vrais clients." : "The site is optimized for local search, but the content stays written for real clients."}
+            title={locale === "fr" ? "Problèmes fréquents pris en charge." : "Common issues handled."}
+            text={locale === "fr" ? "Ordinateur lent, virus, courriel, imprimante, Wi-Fi, Windows ou besoin PME: on part du symptôme et on choisit la bonne intervention." : "Slow computer, viruses, email, printers, Wi-Fi, Windows or small business needs: we start with the symptom and choose the right intervention."}
           />
           <div class="grid gap-3 sm:grid-cols-2">
             {problems[locale].map((problem) => (
@@ -349,7 +341,7 @@ const servicesSections = serviceSeoSections[locale];
           <SectionIntro
             label={locale === "fr" ? "Liste complète" : "Complete list"}
             title={locale === "fr" ? "Services offerts par Info Dorais." : "Services offered by Info Dorais."}
-            text={locale === "fr" ? "Cette liste aide aussi à orienter une demande de diagnostic." : "This list also helps guide a diagnostic request."}
+            text={locale === "fr" ? "Vous ne voyez pas exactement votre situation? Appelez ou envoyez les détails, et on vous dira si c’est le bon type d’intervention." : "Do not see your exact situation? Call or send the details, and we will tell you if it is the right type of intervention."}
           />
           <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {allServices[locale].map((service) => (

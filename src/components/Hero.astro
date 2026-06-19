@@ -118,7 +118,7 @@ const carouselSlides =
               class="home-slide-media"
             />
             <div class="home-slide-overlay"></div>
-            <div class="relative flex min-h-[360px] flex-col justify-end p-5 text-white sm:min-h-[430px] sm:p-7">
+            <div class="home-slide-content relative flex min-h-[360px] flex-col justify-end p-5 text-white sm:min-h-[430px] sm:p-7">
               <span class="text-xs font-black uppercase tracking-[0.16em] text-white/72">{slide.kicker}</span>
               <h2 class="mt-3 font-heading text-4xl font-black leading-none sm:text-5xl">{slide.title}</h2>
               <p class="mt-4 max-w-sm text-sm font-bold leading-6 text-white/82 sm:text-base">{slide.text}</p>
@@ -154,14 +154,9 @@ const carouselSlides =
       carousel.dataset.carouselReady = "true";
       let active = slides.findIndex((slide) => slide.classList.contains("is-active"));
       if (active < 0) active = 0;
+      let leaveTimer;
 
-      const showSlide = (nextIndex) => {
-        active = (nextIndex + slides.length) % slides.length;
-        slides.forEach((slide, index) => {
-          const isActive = index === active;
-          slide.classList.toggle("is-active", isActive);
-          slide.setAttribute("aria-hidden", isActive ? "false" : "true");
-        });
+      const updateDots = () => {
         dots.forEach((dot, index) => {
           const isActive = index === active;
           dot.classList.toggle("is-active", isActive);
@@ -171,6 +166,30 @@ const carouselSlides =
             dot.removeAttribute("aria-current");
           }
         });
+      };
+
+      const showSlide = (nextIndex, instant = false) => {
+        const next = (nextIndex + slides.length) % slides.length;
+        if (next === active && !instant) return;
+
+        const previous = active;
+        active = next;
+        window.clearTimeout(leaveTimer);
+
+        slides.forEach((slide, index) => {
+          const isActive = index === active;
+          const isLeaving = !instant && index === previous && previous !== active;
+          slide.classList.toggle("is-active", isActive);
+          slide.classList.toggle("is-leaving", isLeaving);
+          slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+        });
+        updateDots();
+
+        if (!instant && previous !== active) {
+          leaveTimer = window.setTimeout(() => {
+            slides[previous]?.classList.remove("is-leaving");
+          }, 950);
+        }
       };
 
       let timer;
@@ -195,7 +214,7 @@ const carouselSlides =
         }
       });
 
-      showSlide(active);
+      showSlide(active, true);
       startTimer();
     };
 
